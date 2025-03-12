@@ -6,6 +6,16 @@ This document is specifically designed for AI agents (like Claude, GPT, etc.) op
 
 When you are instructed to "Read the Agentic framework located at $HOME/Agentic to load your rules and tools," this is the primary document you should reference to understand how to operate correctly on this system.
 
+> **Important**: All rules in this document are also available in a structured, machine-readable format in the `rules.json` file. You can use the `rule_loader.py` script to programmatically access and verify your understanding of these rules:
+> 
+> ```bash
+> # Verify your understanding of the rules
+> ./rule_loader.py verify
+> 
+> # Query specific rules
+> ./rule_loader.py query python_environment
+> ```
+
 ## Table of Contents
 
 1. [Python Environment Management](#python-environment-management)

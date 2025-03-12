@@ -2,6 +2,16 @@
 
 This document provides a concise reference of essential information for AI agents operating within the Agentic framework. For complete details, refer to [Agent Operation Rules](AGENT_RULES.md).
 
+> **Important**: All rules are available in a structured, machine-readable format in the `rules.json` file. You can use the `rule_loader.py` script to programmatically access and verify your understanding of these rules:
+> 
+> ```bash
+> # Verify your understanding of the rules
+> ./rule_loader.py verify
+> 
+> # Query specific rules
+> ./rule_loader.py query python_environment
+> ```
+
 ## Key Directories
 
 ```

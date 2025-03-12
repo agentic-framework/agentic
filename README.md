@@ -8,18 +8,21 @@ This repository contains rules, guidelines, and tools for allowing AI agents to 
 
 ## Documentation Structure
 
-The documentation is organized into four main sections:
+The documentation is organized into five main sections:
 
 - **For Humans (Overview)**: This README provides an overview of the framework, its features, and basic usage instructions.
 - **For Humans (Detailed Guide)**: The [Human Guide](HUMAN_GUIDE.md) provides detailed instructions for human users on how to effectively use the framework and work with AI agents.
 - **For Agents (Comprehensive)**: The [Agent Operation Rules](AGENT_RULES.md) document contains detailed rules and guidelines that AI agents should follow when operating on this machine.
 - **For Agents (Quick Reference)**: The [Agent Quick Reference Guide](AGENT_QUICK_REFERENCE.md) provides a concise summary of essential information for AI agents, serving as a quick lookup resource for common tasks and rules.
+- **Directory Structure**: The [Directory Structure Guide](DIRECTORY_STRUCTURE.md) provides a detailed explanation of the framework's directory structure, specifically addressing the distinction between the root Agentic folder and the git-managed repository folder.
 
 ## Directory Structure
 
+For a detailed explanation of the directory structure, including the important distinction between the root Agentic folder and the git-managed repository folder, see the [Directory Structure Guide](DIRECTORY_STRUCTURE.md).
+
 ```
 $HOME/Agentic/
-├── agentic/              # This repository (rules and core tools)
+├── agentic/              # Git-managed repository (rules and core tools)
 ├── projects/             # All agent-created projects
 ├── shared/               # Shared resources between projects
 ├── tmp/                  # Temporary files
@@ -31,6 +34,83 @@ $HOME/Agentic/
 ## Utility Scripts
 
 This repository includes several utility scripts to help agents follow the rules and manage the environment:
+
+### Security Enforcement
+
+The `security.py` script provides technical enforcement mechanisms to ensure AI agents operate only within their designated areas:
+
+```bash
+# Check if a path is allowed
+./security.py check-path /path/to/check
+
+# Validate a command for execution
+./security.py validate-command "command to validate"
+
+# Scan a file for potential security violations
+./security.py scan-file /path/to/file
+
+# Calculate the SHA-256 hash of a file
+./security.py hash-file /path/to/file
+
+# Verify the integrity of a file
+./security.py verify-integrity /path/to/file expected-hash
+```
+
+This script enforces security boundaries, validates operations, and logs security events. It helps prevent AI agents from accessing or modifying files outside their designated areas.
+
+### Configuration Management
+
+The `config.py` script provides a centralized configuration system for the Agentic framework:
+
+```bash
+# Get a configuration value
+./config.py get paths.agentic_root
+
+# Set a configuration value
+./config.py set python.default_python_version 3.12
+
+# List all configuration values
+./config.py list
+
+# List a specific section
+./config.py list --section paths
+
+# Check if a path is allowed
+./config.py check /path/to/check
+
+# Reset configuration to defaults
+./config.py reset
+```
+
+This script provides a standardized API for accessing configuration values and handles path variability across different installations. All other scripts in the framework use this configuration system to ensure consistency.
+
+### Rule Loading and Verification
+
+The `rule_loader.py` script provides utilities for loading, verifying, and querying the Agentic framework rules:
+
+```bash
+# Verify an AI agent's understanding of the rules
+./rule_loader.py verify
+
+# Run verification in non-interactive mode
+./rule_loader.py verify --non-interactive
+
+# Save verification results to a file
+./rule_loader.py verify --output /path/to/results.json
+
+# Query specific rules
+./rule_loader.py query python_environment
+./rule_loader.py query python_environment --subcategory virtual_environments
+./rule_loader.py query python_environment --subcategory virtual_environments --key location
+
+# List rule categories
+./rule_loader.py list
+
+# List utility scripts
+./rule_loader.py list --utility-scripts
+```
+
+This script uses a structured rules file (`rules.json`) that contains all the framework rules in a machine-readable format, enabling programmatic access and verification.
 
 ### Environment Check
 
@@ -202,10 +282,32 @@ The Agentic framework includes several key features to ensure robustness and rel
 To work with this framework:
 
 1. Clone this repository
-2. Run `./check_environment.py --fix` to set up the environment
-3. Read the [Human Guide](HUMAN_GUIDE.md) for detailed instructions on how to use the framework
-4. Use the utility scripts to manage your projects and environments
-5. Follow the directory structure and guidelines when creating new projects
+2. Run the setup script to fully set up the environment:
+   ```bash
+   ./setup_agentic.sh
+   ```
+   This script will:
+   - Install required dependencies (uv)
+   - Create all necessary directories
+   - Initialize the virtual environment registry
+   - Make utility scripts executable
+
+   You can also run specific setup steps:
+   ```bash
+   # Install dependencies only
+   ./setup_agentic.sh --install-dependencies
+   
+   # Create directories only
+   ./setup_agentic.sh --create-directories
+   
+   # Initialize registry only
+   ./setup_agentic.sh --initialize-registry
+   ```
+
+3. Run `./check_environment.py` to verify the environment is set up correctly
+4. Read the [Human Guide](HUMAN_GUIDE.md) for detailed instructions on how to use the framework
+5. Use the utility scripts to manage your projects and environments
+6. Follow the directory structure and guidelines when creating new projects
 
 For AI agents: Review the [Agent Operation Rules](AGENT_RULES.md) or the [Quick Reference Guide](AGENT_QUICK_REFERENCE.md) to understand how to operate within this framework.
 

@@ -99,6 +99,12 @@ Read the Agentic framework located at $HOME/Agentic to load your rules and tools
 
 6. **Feedback Loop**: Provide feedback to the agent about what worked and what didn't to help it improve.
 
+7. **Verify Understanding**: Use the rule verification system to ensure the agent has correctly understood the framework rules:
+   ```
+   ./rule_loader.py verify
+   ```
+   This will quiz the agent on its understanding of key rules and provide a score.
+
 ## Common Use Cases
 
 ### Python Project Management

@@ -1,0 +1,220 @@
+{
+  "version": "1.0.0",
+  "last_updated": "2025-03-13",
+  "metadata": {
+    "description": "Structured rules for the Agentic framework",
+    "documentation_url": "https://github.com/yourusername/agentic"
+  },
+  "rules": {
+    "python_environment": {
+      "package_manager": "uv",
+      "package_manager_rules": [
+        "Use uv exclusively for Python package management",
+        "Do not use pip, conda, or other package managers directly",
+        "Use parallel mode for faster installations when appropriate"
+      ],
+      "virtual_environments": {
+        "location": "project/.venv",
+        "naming": ".venv",
+        "creation_command": "uv venv /path/to/project/.venv",
+        "activation_command": "source /path/to/project/.venv/bin/activate",
+        "registration": "All virtual environments must be registered in the central registry",
+        "version_control": "Virtual environments should not be committed to version control"
+      },
+      "dependencies": {
+        "requirements_file": ["requirements.txt", "pyproject.toml"],
+        "dev_dependencies": ["requirements-dev.txt", "pyproject.toml[dev]"],
+        "lock_files": "Lock files (uv.lock) should be committed for applications but not for libraries"
+      }
+    },
+    "directory_structure": {
+      "root": "$HOME/Agentic",
+      "projects_dir": "$HOME/Agentic/projects",
+      "shared_dir": "$HOME/Agentic/shared",
+      "tmp_dir": "$HOME/Agentic/tmp",
+      "logs_dir": "$HOME/Agentic/logs",
+      "cache_dir": "$HOME/Agentic/cache",
+      "backups_dir": "$HOME/Agentic/backups",
+      "repository_dir": "$HOME/Agentic/agentic",
+      "registry_file": "$HOME/Agentic/venv_registry.json",
+      "project_structure": {
+        "venv_dir": ".venv",
+        "source_dir": "src",
+        "tests_dir": "tests",
+        "docs_dir": "docs",
+        "data_dir": "data",
+        "notebooks_dir": "notebooks",
+        "logs_dir": "logs",
+        "required_files": ["README.md", "LICENSE", ".gitignore"]
+      }
+    },
+    "naming_conventions": {
+      "project_directories": "kebab-case (e.g., my-project-name)",
+      "python_modules": "snake_case",
+      "classes": "PascalCase",
+      "functions": "snake_case",
+      "variables": "snake_case",
+      "constants": "UPPER_SNAKE_CASE"
+    },
+    "project_management": {
+      "initialization": {
+        "required_files": ["README.md", "LICENSE", ".gitignore"],
+        "creation_command": "./create_project.py \"Project Name\" --description \"Description\""
+      },
+      "documentation": {
+        "code_style": "Google style docstrings",
+        "required_documentation": ["README.md", "function docstrings", "class docstrings"]
+      },
+      "testing": {
+        "framework": "pytest",
+        "location": "tests/",
+        "coverage": "Aim for reasonable test coverage for critical functionality"
+      }
+    },
+    "git_and_version_control": {
+      "repository_structure": "Each project should have its own git repository",
+      "commit_messages": {
+        "format": "type(scope): description",
+        "types": ["feat", "fix", "docs", "style", "refactor", "test", "chore"]
+      },
+      "branching_strategy": {
+        "main_branch": "Main branch should always be stable",
+        "feature_branches": "Use feature branches for development",
+        "naming_convention": "type/description (e.g., feature/add-login, fix/memory-leak)"
+      }
+    },
+    "agent_operation": {
+      "permissions": {
+        "allowed_areas": ["$HOME/Agentic/"],
+        "restricted_areas": ["System files", "Global configurations"],
+        "modification_rules": "Agents should not modify system files or configurations outside their designated areas"
+      },
+      "resource_usage": {
+        "monitoring": "Monitor and limit CPU and memory usage",
+        "cleanup": "Clean up resources after tasks are completed",
+        "concurrent_operations": "Limit concurrent operations to avoid overloading the system"
+      },
+      "tool_usage": {
+        "preference": "Prefer using established tools and libraries over creating custom solutions",
+        "documentation": "Document all tools and dependencies used in projects",
+        "updates": "Keep tools and dependencies updated to secure versions"
+      }
+    },
+    "security": {
+      "access_control": {
+        "privileges": "Agents should operate with the minimum privileges necessary",
+        "sensitive_information": "Do not store or expose sensitive information in code or version control",
+        "storage": "Use environment variables or secure storage for sensitive information"
+      },
+      "data_handling": {
+        "sensitive_data": "Do not process sensitive user data without explicit permission",
+        "anonymization": "Anonymize or pseudonymize data when possible",
+        "temporary_data": "Delete temporary data after use"
+      },
+      "network_security": {
+        "trusted_domains": "Limit network requests to trusted domains",
+        "secure_connections": "Use secure connections (HTTPS, SSH) for all network communications",
+        "documentation": "Document all external services and APIs used by projects"
+      }
+    },
+    "logging_and_monitoring": {
+      "logging": {
+        "location": "logs/ directory",
+        "sensitive_information": "Do not log sensitive information",
+        "structured_logging": "Use structured logging when possible",
+        "log_levels": ["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"],
+        "log_rotation": "Implement log rotation to prevent log files from growing too large"
+      },
+      "monitoring": {
+        "activity_log": "All agent activities should be recorded in an activity log",
+        "resource_usage": "Monitor resource usage and performance",
+        "alerts": "Set up alerts for unusual behavior or errors"
+      }
+    },
+    "error_handling": {
+      "error_reporting": {
+        "exception_handling": "Implement proper error handling in all code",
+        "logging": "Catch and log exceptions appropriately",
+        "error_messages": "Provide meaningful error messages with context information"
+      },
+      "recovery": {
+        "graceful_degradation": "Implement graceful degradation when possible",
+        "automatic_recovery": "Design systems to recover from failures automatically when appropriate",
+        "retry_mechanisms": "Implement retry mechanisms with exponential backoff for transient failures"
+      }
+    },
+    "caching_and_optimization": {
+      "cache_management": {
+        "location": "$HOME/Agentic/cache/",
+        "organization": "Organize cache files in subdirectories by purpose or application",
+        "invalidation": "Include cache invalidation mechanisms to prevent stale data",
+        "cleanup": "Regularly clean up old cache files"
+      },
+      "performance_optimization": {
+        "parallel_processing": "Use parallel processing when appropriate for CPU-intensive tasks",
+        "timeouts": "Implement appropriate timeouts for network operations",
+        "resource_monitoring": "Monitor and optimize resource usage"
+      }
+    },
+    "backup_and_recovery": {
+      "backup_procedures": {
+        "location": "$HOME/Agentic/backups/",
+        "critical_files": "Regularly back up critical files",
+        "naming": "Use timestamped filenames for backups to maintain version history",
+        "automation": "Implement automatic backup before critical operations"
+      },
+      "recovery_procedures": {
+        "documentation": "Document recovery procedures for common failure scenarios",
+        "automation": "Implement automatic recovery mechanisms where possible",
+        "verification": "Verify the integrity of restored files after recovery"
+      }
+    }
+  },
+  "utility_scripts": {
+    "check_environment.py": {
+      "purpose": "Verify that the environment is set up correctly",
+      "usage": "./check_environment.py [--fix]",
+      "checks": ["UV installation", "Directory structure", "Registry file", "Utility scripts", "Python installations", "Virtual environments", "Disk space"]
+    },
+    "venv_manager.py": {
+      "purpose": "Manage Python virtual environments registry",
+      "commands": {
+        "list": "List all registered virtual environments",
+        "add": "Add a virtual environment to the registry",
+        "remove": "Remove a virtual environment from the registry",
+        "check": "Check if a virtual environment is registered and verify its status",
+        "update-packages": "Update the package list for a virtual environment",
+        "cleanup": "Remove entries for virtual environments that no longer exist",
+        "repair": "Attempt to repair the registry by scanning for virtual environments",
+        "backup": "Create a backup of the registry file"
+      }
+    },
+    "create_project.py": {
+      "purpose": "Create new projects with the standard structure",
+      "usage": "./create_project.py \"Project Name\" [--description \"Description\"] [--license License]"
+    },
+    "uv_manager.py": {
+      "purpose": "Install and manage uv and Python",
+      "commands": {
+        "install": "Install uv",
+        "update": "Update uv",
+        "list-python": "List available Python versions",
+        "install-python": "Install a specific Python version",
+        "create-venv": "Create a virtual environment",
+        "install-deps": "Install dependencies in a virtual environment",
+        "install-editable": "Install a project in editable mode",
+        "info": "Show information about uv",
+        "clean-cache": "Clean the uv cache"
+      }
+    },
+    "cleanup_manager.py": {
+      "purpose": "Clean up temporary files and maintain the directory structure",
+      "commands": {
+        "cleanup-tmp": "Clean up temporary files older than 7 days",
+        "check-orphaned-venvs": "Check for orphaned virtual environments",
+        "check-structure": "Check the directory structure",
+        "disk-usage": "Analyze disk usage"
+      }
+    }
+  }
+}
