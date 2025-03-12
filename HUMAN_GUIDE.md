@@ -32,8 +32,11 @@ As a human user, you should be familiar with this guide and the README, but you 
 To set up the Agentic framework:
 
 1. Clone the repository to your machine
-2. Run `./check_environment.py --fix` to set up the environment
-3. Review this guide to understand how to use the framework
+2. Run `./setup_agentic.sh` to fully set up the environment
+   - This will install dependencies, create necessary directories, and initialize the registry
+   - If you encounter issues with the automated setup (particularly network-related issues), follow the [Manual Setup Guide](MANUAL_SETUP.md) instead
+3. Run `./check_environment.py` to verify the environment is set up correctly
+4. Review this guide to understand how to use the framework
 
 ## How to Instruct AI Agents
 

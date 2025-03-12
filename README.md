@@ -304,6 +304,8 @@ To work with this framework:
    ./setup_agentic.sh --initialize-registry
    ```
 
+   If you encounter issues with the automated setup script (particularly network-related issues when installing dependencies), you can follow the [Manual Setup Guide](MANUAL_SETUP.md) to set up the environment manually.
+
 3. Run `./check_environment.py` to verify the environment is set up correctly
 4. Read the [Human Guide](HUMAN_GUIDE.md) for detailed instructions on how to use the framework
 5. Use the utility scripts to manage your projects and environments
