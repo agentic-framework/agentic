@@ -35,8 +35,19 @@ The Agentic framework is designed to provide a structured environment for AI age
 All files and directories related to the Agentic framework are organized under the `$HOME/Agentic/` directory:
 
 ```
-$HOME/Agentic/
-├── agentic/              # This repository (rules and core tools)
+$HOME/Agentic/            # Root Agentic directory (not under version control)
+├── agentic/              # Git repository containing rules and core tools
+│   ├── README.md
+│   ├── AGENT_RULES.md
+│   ├── AGENT_QUICK_REFERENCE.md
+│   ├── HUMAN_GUIDE.md
+│   ├── CONSOLIDATED_DOCS.md
+│   ├── check_environment.py
+│   ├── venv_manager.py
+│   ├── create_project.py
+│   ├── uv_manager.py
+│   ├── cleanup_manager.py
+│   └── issues/           # Documentation of issues and improvements
 ├── projects/             # All agent-created projects
 ├── shared/               # Shared resources between projects
 ├── tmp/                  # Temporary files
@@ -44,6 +55,8 @@ $HOME/Agentic/
 ├── cache/                # Cache for downloads and other data
 └── backups/              # Backup files for registry and other critical data
 ```
+
+> **Important Note**: The `$HOME/Agentic/` root directory is NOT under version control. Only the `$HOME/Agentic/agentic/` subdirectory is a git repository. When using git commands, always ensure you're in the correct directory (`$HOME/Agentic/agentic/`).
 
 ### Project Structure
 
