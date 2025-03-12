@@ -1,6 +1,17 @@
 #!/usr/bin/env python3
 """
-Script to demonstrate using the core feedback system directly.
+Feedback CLI - Command Line Interface for the Agentic Feedback System
+
+This script provides a command-line interface for interacting with the Agentic
+feedback system. It allows users to list, view, update, and comment on feedback
+items such as issues, improvements, questions, and compliance reports.
+
+Usage:
+  ./feedback_cli.py list                      # List all issues
+  ./feedback_cli.py get <id>                  # Get details of a specific issue
+  ./feedback_cli.py update <id> <status>      # Update the status of an issue
+  ./feedback_cli.py comment <id> <comment>    # Add a comment to an issue
+  ./feedback_cli.py submit <title> <desc>     # Submit a new issue
 """
 
 import os
@@ -44,8 +55,8 @@ def print_issue(issue_data):
 def main():
     """Main function to demonstrate the feedback system."""
     if len(sys.argv) < 2:
-        print("Usage: python use_feedback_system.py <command> [args]")
-        print("Commands: list, get, update, comment")
+        print("Usage: ./feedback_cli.py <command> [args]")
+        print("Commands: list, get, update, comment, submit")
         return
     
     command = sys.argv[1]
@@ -60,7 +71,7 @@ def main():
     elif command == "get":
         # Get a specific issue
         if len(sys.argv) < 3:
-            print("Usage: python use_feedback_system.py get <issue_id>")
+            print("Usage: ./feedback_cli.py get <issue_id>")
             return
         
         issue_id = sys.argv[2]
@@ -74,7 +85,7 @@ def main():
     elif command == "update":
         # Update an issue's status
         if len(sys.argv) < 4:
-            print("Usage: python use_feedback_system.py update <issue_id> <status>")
+            print("Usage: ./feedback_cli.py update <issue_id> <status>")
             return
         
         issue_id = sys.argv[2]
@@ -102,7 +113,7 @@ def main():
     elif command == "comment":
         # Add a comment to an issue
         if len(sys.argv) < 4:
-            print("Usage: python use_feedback_system.py comment <issue_id> <comment>")
+            print("Usage: ./feedback_cli.py comment <issue_id> <comment>")
             return
         
         issue_id = sys.argv[2]
@@ -119,9 +130,35 @@ def main():
         else:
             print("Failed to add comment to issue: {}".format(issue_id))
     
+    elif command == "submit":
+        # Submit a new issue
+        if len(sys.argv) < 4:
+            print("Usage: ./feedback_cli.py submit <title> <description>")
+            return
+        
+        title = sys.argv[2]
+        description = sys.argv[3]
+        
+        # Submit the issue
+        issue_id = submit_issue(
+            title=title,
+            description=description,
+            priority=FeedbackPriority.MEDIUM,
+            tags=["cli"]
+        )
+        
+        if issue_id:
+            print("Issue submitted with ID: {}".format(issue_id))
+            issue_data = get_feedback(issue_id)
+            if issue_data:
+                print_issue(issue_data)
+        else:
+            print("Failed to submit issue")
+    
     else:
         print("Unknown command: {}".format(command))
-        print("Commands: list, get, update, comment")
+        print("Commands: list, get, update, comment, submit")
+        print("Run without arguments for usage details")
 
 if __name__ == "__main__":
     main()
