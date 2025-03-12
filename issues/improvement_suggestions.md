@@ -2,10 +2,12 @@
 
 This document outlines suggested improvements to address the issues identified in the Agentic framework.
 
-## Structural Improvements
+## Initial Prompt and Discovery Improvements
 
-### 5. Consolidated Documentation
-Create a single, comprehensive document with clear sections, or implement a documentation system with better cross-referencing. Consider using a documentation generator that can combine multiple markdown files into a cohesive whole.
+### 1. Clear Path Documentation
+Improve documentation to clearly distinguish between the root Agentic folder ($HOME/Agentic) and the git-managed repository folder ($HOME/Agentic/agentic). Add explicit diagrams and examples showing which paths are used for what purposes, and which directories are under version control.
+
+## Structural Improvements
 
 ### 6. Structured Rule Format
 Convert rules to a structured format (JSON/YAML) that can be programmatically loaded, validated, and enforced:

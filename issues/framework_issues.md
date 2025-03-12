@@ -4,10 +4,10 @@ This document outlines identified issues with the Agentic framework, particularl
 
 ## Initial Prompt and Discovery Issues
 
-## Structural and Implementation Problems
+### 1. Path Confusion
+The framework documentation doesn't clearly distinguish between the root Agentic folder ($HOME/Agentic) and the git-managed repository folder ($HOME/Agentic/agentic), leading to confusion when using git commands or referencing paths.
 
-### 5. Documentation Fragmentation
-Rules and guidelines are spread across multiple files (AGENT_RULES.md, AGENT_QUICK_REFERENCE.md, etc.) without a clear reading order or priority, making comprehensive understanding challenging.
+## Structural and Implementation Problems
 
 ### 6. Manual Rule Loading
 The framework relies on AI agents correctly interpreting documentation with no programmatic mechanism to ensure complete and consistent rule loading.
