@@ -17,7 +17,7 @@ from datetime import datetime, timedelta
 from pathlib import Path
 
 # Base directories
-AGENTIC_DIR = "/Users/mingli/Agentic"
+AGENTIC_DIR = os.path.expanduser("~/Agentic")
 TMP_DIR = os.path.join(AGENTIC_DIR, "tmp")
 PROJECTS_DIR = os.path.join(AGENTIC_DIR, "projects")
 SHARED_DIR = os.path.join(AGENTIC_DIR, "shared")

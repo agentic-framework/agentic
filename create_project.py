@@ -15,7 +15,7 @@ from datetime import datetime
 import shutil
 
 # Base directory for projects
-PROJECTS_DIR = "/Users/mingli/Agentic/projects"
+PROJECTS_DIR = os.path.expanduser("~/Agentic/projects")
 
 def run_command(command, cwd=None):
     """Run a shell command and return the output."""
@@ -197,7 +197,7 @@ docstring-quotes = "double"
 def create_gitignore(project_path):
     """Create a .gitignore file for the project."""
     # Copy the .gitignore from the agentic repository
-    agentic_gitignore = "/Users/mingli/Agentic/agentic/.gitignore"
+    agentic_gitignore = os.path.expanduser("~/Agentic/agentic/.gitignore")
     
     if os.path.exists(agentic_gitignore):
         shutil.copy(agentic_gitignore, os.path.join(project_path, ".gitignore"))
@@ -284,7 +284,7 @@ def initialize_git(project_path):
 def register_virtual_environment(venv_path, project_name, description):
     """Register the virtual environment in the registry."""
     # Use the venv_manager.py script to register the virtual environment
-    script_path = "/Users/mingli/Agentic/agentic/venv_manager.py"
+    script_path = os.path.expanduser("~/Agentic/agentic/venv_manager.py")
     
     if not os.path.exists(script_path):
         print(f"Warning: venv_manager.py not found at {script_path}")

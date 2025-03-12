@@ -32,8 +32,8 @@ logger = logging.getLogger("venv_manager")
 os.makedirs(os.path.expanduser("~/Agentic/logs"), exist_ok=True)
 
 # Registry file path
-REGISTRY_PATH = "/Users/mingli/Agentic/venv_registry.json"
-BACKUP_DIR = "/Users/mingli/Agentic/backups"
+REGISTRY_PATH = os.path.expanduser("~/Agentic/venv_registry.json")
+BACKUP_DIR = os.path.expanduser("~/Agentic/backups")
 
 # Create backup directory if it doesn't exist
 os.makedirs(BACKUP_DIR, exist_ok=True)
@@ -519,8 +519,8 @@ def repair_registry():
     
     # Scan common locations for virtual environments
     scan_locations = [
-        "/Users/mingli/Agentic/projects",
-        "/Users/mingli/Climate"
+        os.path.expanduser("~/Agentic/projects"),
+        os.path.expanduser("~/Climate")
     ]
     
     found_venvs = []

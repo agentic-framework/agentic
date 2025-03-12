@@ -31,7 +31,7 @@ logger = logging.getLogger("check_environment")
 os.makedirs(os.path.expanduser("~/Agentic/logs"), exist_ok=True)
 
 # Base directories
-AGENTIC_DIR = "/Users/mingli/Agentic"
+AGENTIC_DIR = os.path.expanduser("~/Agentic")
 TMP_DIR = os.path.join(AGENTIC_DIR, "tmp")
 PROJECTS_DIR = os.path.join(AGENTIC_DIR, "projects")
 SHARED_DIR = os.path.join(AGENTIC_DIR, "shared")
