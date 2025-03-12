@@ -44,6 +44,19 @@ While there's a `check_environment.py --fix` command, there's no single command 
 ### 12. Security Boundary Enforcement
 Security relies primarily on documentation-based rules rather than technical enforcement mechanisms, potentially allowing AI agents to operate outside their designated areas.
 
+### 13. External Project References
+The venv_manager.py script specifically references a 'Climate' folder outside the $HOME/Agentic directory in its repair_registry() function:
+
+```python
+# Scan common locations for virtual environments
+scan_locations = [
+    os.path.expanduser("~/Agentic/projects"),
+    os.path.expanduser("~/Climate")
+]
+```
+
+This violates the principle that all agent-managed projects should be contained within $HOME/Agentic to prevent potential leakage of users' private information.
+
 ## Usability and Integration Problems
 
 ### 13. No Self-Identification Mechanism

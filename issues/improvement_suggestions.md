@@ -77,6 +77,8 @@ Implement additional security measures, such as:
 - Permission checks before file operations
 - Audit logging of all operations
 - Configurable security levels
+- Automated scanning of scripts to detect and remove references to directories outside $HOME/Agentic
+- Specifically remove the reference to the '~/Climate' directory in venv_manager.py's repair_registry() function and replace it with a configurable list of directories that defaults to only include directories within $HOME/Agentic
 
 ## Usability and Integration Enhancements
 
