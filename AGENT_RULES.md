@@ -1,6 +1,10 @@
 # Agent Operation Rules
 
-This document outlines the rules and guidelines for agents operating on this machine. These rules are designed to maintain a clean, organized, and secure environment while allowing agents to have significant operational freedom.
+## For AI Agents
+
+This document is specifically designed for AI agents (like Claude, GPT, etc.) operating on this machine. It contains the comprehensive set of rules and guidelines that you, as an AI agent, must follow when performing tasks. These rules are designed to maintain a clean, organized, and secure environment while allowing you to have significant operational freedom.
+
+When you are instructed to "Read Agentic folders to load your rules and tools," this is the primary document you should reference to understand how to operate correctly on this system.
 
 ## Table of Contents
 

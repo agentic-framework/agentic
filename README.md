@@ -6,16 +6,14 @@ A framework for managing and operating AI agents with controlled access to a mac
 
 This repository contains rules, guidelines, and tools for allowing AI agents to operate on a machine with significant freedom while maintaining security, organization, and best practices.
 
-## Agent Rules
+## Documentation Structure
 
-The [Agent Operation Rules](AGENT_RULES.md) document outlines the comprehensive set of rules and guidelines that agents must follow when operating on this machine. These rules cover:
+The documentation is organized into four main sections:
 
-- Python environment management using uv
-- Directory structure and organization
-- Project management practices
-- Git and version control standards
-- Security considerations
-- And more
+- **For Humans (Overview)**: This README provides an overview of the framework, its features, and basic usage instructions.
+- **For Humans (Detailed Guide)**: The [Human Guide](HUMAN_GUIDE.md) provides detailed instructions for human users on how to effectively use the framework and work with AI agents.
+- **For Agents (Comprehensive)**: The [Agent Operation Rules](AGENT_RULES.md) document contains detailed rules and guidelines that AI agents should follow when operating on this machine.
+- **For Agents (Quick Reference)**: The [Agent Quick Reference Guide](AGENT_QUICK_REFERENCE.md) provides a concise summary of essential information for AI agents, serving as a quick lookup resource for common tasks and rules.
 
 ## Directory Structure
 
@@ -205,9 +203,11 @@ To work with this framework:
 
 1. Clone this repository
 2. Run `./check_environment.py --fix` to set up the environment
-3. Review the [Agent Operation Rules](AGENT_RULES.md)
+3. Read the [Human Guide](HUMAN_GUIDE.md) for detailed instructions on how to use the framework
 4. Use the utility scripts to manage your projects and environments
 5. Follow the directory structure and guidelines when creating new projects
+
+For AI agents: Review the [Agent Operation Rules](AGENT_RULES.md) or the [Quick Reference Guide](AGENT_QUICK_REFERENCE.md) to understand how to operate within this framework.
 
 ## Using with AI Agents
 
@@ -217,6 +217,14 @@ When working with AI agents (like Claude, GPT, etc.), you can instruct them to u
 
 ```
 Read Agentic folders to load your rules and tools, and help me with [your task].
+```
+
+### Quick Reference Loading
+
+For simpler tasks where the agent doesn't need the full ruleset:
+
+```
+Read the Agentic quick reference guide and help me with [your task].
 ```
 
 ### Creating a New Project
