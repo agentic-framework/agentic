@@ -48,16 +48,16 @@ This document outlines the rules and guidelines for agents operating on this mac
 ### Environment Cleanup
 
 - Regularly clean unused virtual environments.
-- Maintain a list of active virtual environments in `$home/Agentic/venv_registry.json`.
+- Maintain a list of active virtual environments in `$HOME/Agentic/venv_registry.json`.
 - Update the registry when creating or removing virtual environments.
 
 ## Directory Structure
 
 ### Root Organization
 
-- All agent-created projects should be organized under `$home/Agentic/projects/`.
-- Shared resources should be placed in `$home/Agentic/shared/`.
-- Temporary files should be stored in `$home/Agentic/tmp/` and cleaned regularly.
+- All agent-created projects should be organized under `$HOME/Agentic/projects/`.
+- Shared resources should be placed in `$HOME/Agentic/shared/`.
+- Temporary files should be stored in `$HOME/Agentic/tmp/` and cleaned regularly.
 
 ### Project Structure
 
@@ -130,12 +130,12 @@ This document outlines the rules and guidelines for agents operating on this mac
 
 ### Permissions
 
-- The `$home/Agentic/` folder is the area agents can fully control, used for shared tools and rules for different projects.
-- Agents have permission to create, modify, and delete files within the `$home/Agentic/` directory.
+- The `$HOME/Agentic/` folder is the area agents can fully control, used for shared tools and rules for different projects.
+- Agents have permission to create, modify, and delete files within the `$HOME/Agentic/` directory.
 - Outside the Agentic folder are projects managed by humans; agent actions need to be approved before taking.
 - Agents should not modify system files or configurations outside their designated areas.
 - Agents should not install global packages or modify global configurations without explicit permission.
-- Always use `$home` instead of specific user paths (like "/Users/username/") to keep rules and scripts universal across different environments.
+- Always use `$HOME` instead of specific user paths (like "/Users/username/") to keep rules and scripts universal across different environments.
 
 ### Resource Usage
 

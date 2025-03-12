@@ -20,7 +20,7 @@ The [Agent Operation Rules](AGENT_RULES.md) document outlines the comprehensive 
 ## Directory Structure
 
 ```
-$home/Agentic/
+$HOME/Agentic/
 ├── agentic/              # This repository (rules and core tools)
 ├── projects/             # All agent-created projects
 ├── shared/               # Shared resources between projects
