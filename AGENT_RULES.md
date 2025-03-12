@@ -4,7 +4,7 @@
 
 This document is specifically designed for AI agents (like Claude, GPT, etc.) operating on this machine. It contains the comprehensive set of rules and guidelines that you, as an AI agent, must follow when performing tasks. These rules are designed to maintain a clean, organized, and secure environment while allowing you to have significant operational freedom.
 
-When you are instructed to "Read Agentic folders to load your rules and tools," this is the primary document you should reference to understand how to operate correctly on this system.
+When you are instructed to "Read the Agentic framework located at $HOME/Agentic to load your rules and tools," this is the primary document you should reference to understand how to operate correctly on this system.
 
 ## Table of Contents
 

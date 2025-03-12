@@ -2,35 +2,7 @@
 
 This document outlines suggested improvements to address the issues identified in the Agentic framework.
 
-## Improved Entry Point and Discovery
-
-### 1. Enhanced Initial Prompt
-Replace the ambiguous "Read Agentic folders to load your rules and tools" with a more specific instruction:
-```
-Read the Agentic framework located at $HOME/Agentic to load your rules and tools. Start by examining the README.md and AGENT_RULES.md files in the agentic subdirectory.
-```
-
-### 2. Self-Identification File
-Create a standardized `.agentic-info` file at the root of the framework that contains:
-- Framework version
-- Paths to all relevant documentation
-- List of available tools
-- Directory structure information
-
-### 3. Discovery Protocol
-Implement a standard protocol for AI agents to discover and understand the framework structure without prior knowledge, possibly through a discovery script that outputs framework information in a structured format.
-
 ## Structural Improvements
-
-### 4. Use Environment Variables
-Replace all hardcoded paths with environment variables:
-```python
-# Instead of
-AGENTIC_DIR = "/Users/mingli/Agentic"
-
-# Use
-AGENTIC_DIR = os.path.expanduser("~/Agentic")
-```
 
 ### 5. Consolidated Documentation
 Create a single, comprehensive document with clear sections, or implement a documentation system with better cross-referencing. Consider using a documentation generator that can combine multiple markdown files into a cohesive whole.
@@ -78,26 +50,9 @@ Implement additional security measures, such as:
 - Audit logging of all operations
 - Configurable security levels
 - Automated scanning of scripts to detect and remove references to directories outside $HOME/Agentic
-- Specifically remove the reference to the '~/Climate' directory in venv_manager.py's repair_registry() function and replace it with a configurable list of directories that defaults to only include directories within $HOME/Agentic
-
 ## Usability and Integration Enhancements
 
-### 12. Initialization API
-Create a standardized API for AI agents to initialize and load the framework:
-```python
-from agentic import framework
-
-# Initialize the framework
-agent = framework.initialize()
-
-# Access tools
-agent.create_project("My Project")
-
-# Verify rule compliance
-agent.verify_operation("file_write", path="/path/to/file")
-```
-
-### 13. Centralized Configuration
+### 12. Centralized Configuration
 Implement a centralized configuration system that all tools reference:
 ```python
 # Load configuration
@@ -107,16 +62,16 @@ config = framework.load_config()
 projects_dir = config.get("directory_structure.projects_dir")
 ```
 
-### 14. Interactive Tutorial Mode
+### 13. Interactive Tutorial Mode
 Develop an interactive tutorial that walks new AI agents through the framework, ensuring proper understanding of key concepts and tools.
 
-### 15. Automated Compliance Checking
+### 14. Automated Compliance Checking
 Create tools that can automatically check if operations proposed by AI agents comply with established rules, providing immediate feedback on potential violations.
 
-### 16. Version Control for Rules
+### 15. Version Control for Rules
 Implement versioning for rules to track changes and ensure AI agents are operating with the most current guidelines.
 
-### 17. Feedback Mechanism
+### 16. Feedback Mechanism
 Develop a feedback system that allows AI agents to report issues or suggest improvements to the framework.
 
 ## Implementation Priority

@@ -216,7 +216,7 @@ When working with AI agents (like Claude, GPT, etc.), you can instruct them to u
 ### Basic Framework Loading
 
 ```
-Read Agentic folders to load your rules and tools, and help me with [your task].
+Read the Agentic framework located at $HOME/Agentic to load your rules and tools. Start by examining the README.md and AGENT_RULES.md files in the agentic subdirectory. Then help me with [your task].
 ```
 
 ### Quick Reference Loading
@@ -224,31 +224,31 @@ Read Agentic folders to load your rules and tools, and help me with [your task].
 For simpler tasks where the agent doesn't need the full ruleset:
 
 ```
-Read the Agentic quick reference guide and help me with [your task].
+Read the Agentic framework located at $HOME/Agentic to load your rules and tools. Focus on the AGENT_QUICK_REFERENCE.md file in the agentic subdirectory. Then help me with [your task].
 ```
 
 ### Creating a New Project
 
 ```
-Read Agentic folders to load your rules and tools, and create a new Python project called [project name].
+Read the Agentic framework located at $HOME/Agentic to load your rules and tools. Start by examining the README.md and AGENT_RULES.md files in the agentic subdirectory. Then create a new Python project called [project name].
 ```
 
 ### Working with Virtual Environments
 
 ```
-Read Agentic folders to load your rules and tools, and create a Python [version] virtual environment for [project name].
+Read the Agentic framework located at $HOME/Agentic to load your rules and tools. Start by examining the README.md and AGENT_RULES.md files in the agentic subdirectory. Then create a Python [version] virtual environment for [project name].
 ```
 
 ### Managing Existing Projects
 
 ```
-Read Agentic folders to load your rules and tools, and help me update dependencies for [project name].
+Read the Agentic framework located at $HOME/Agentic to load your rules and tools. Start by examining the README.md and AGENT_RULES.md files in the agentic subdirectory. Then help me update dependencies for [project name].
 ```
 
 ### Troubleshooting
 
 ```
-Read Agentic folders to load your rules and tools, and help me diagnose issues with [project name].
+Read the Agentic framework located at $HOME/Agentic to load your rules and tools. Start by examining the README.md and AGENT_RULES.md files in the agentic subdirectory. Then help me diagnose issues with [project name].
 ```
 
 These prompts instruct the AI agent to first understand the Agentic framework's rules and available tools before proceeding with your specific task. This ensures that the agent follows the established conventions and uses the provided utility scripts appropriately.
