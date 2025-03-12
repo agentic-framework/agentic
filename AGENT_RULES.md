@@ -48,16 +48,16 @@ This document outlines the rules and guidelines for agents operating on this mac
 ### Environment Cleanup
 
 - Regularly clean unused virtual environments.
-- Maintain a list of active virtual environments in `/Users/mingli/Agentic/venv_registry.json`.
+- Maintain a list of active virtual environments in `$home/Agentic/venv_registry.json`.
 - Update the registry when creating or removing virtual environments.
 
 ## Directory Structure
 
 ### Root Organization
 
-- All agent-created projects should be organized under `/Users/mingli/Agentic/projects/`.
-- Shared resources should be placed in `/Users/mingli/Agentic/shared/`.
-- Temporary files should be stored in `/Users/mingli/Agentic/tmp/` and cleaned regularly.
+- All agent-created projects should be organized under `$home/Agentic/projects/`.
+- Shared resources should be placed in `$home/Agentic/shared/`.
+- Temporary files should be stored in `$home/Agentic/tmp/` and cleaned regularly.
 
 ### Project Structure
 
@@ -130,9 +130,12 @@ This document outlines the rules and guidelines for agents operating on this mac
 
 ### Permissions
 
-- Agents have permission to create, modify, and delete files within the `/Users/mingli/Agentic/` directory.
+- The `$home/Agentic/` folder is the area agents can fully control, used for shared tools and rules for different projects.
+- Agents have permission to create, modify, and delete files within the `$home/Agentic/` directory.
+- Outside the Agentic folder are projects managed by humans; agent actions need to be approved before taking.
 - Agents should not modify system files or configurations outside their designated areas.
 - Agents should not install global packages or modify global configurations without explicit permission.
+- Always use `$home` instead of specific user paths (like "/Users/username/") to keep rules and scripts universal across different environments.
 
 ### Resource Usage
 
