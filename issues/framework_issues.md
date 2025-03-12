@@ -4,15 +4,12 @@ This document outlines identified issues with the Agentic framework, particularl
 
 ## Initial Prompt and Discovery Issues
 
-### 1. Path Confusion
-The framework documentation doesn't clearly distinguish between the root Agentic folder ($HOME/Agentic) and the git-managed repository folder ($HOME/Agentic/agentic), leading to confusion when using git commands or referencing paths.
-
 ## Structural and Implementation Problems
 
-### 6. Manual Rule Loading
+### 6. Manual Rule Loading (fix given but not verified)
 The framework relies on AI agents correctly interpreting documentation with no programmatic mechanism to ensure complete and consistent rule loading.
 
-### 7. No Verification System
+### 7. No Verification Systemg (fix given but not verified)
 There's no way to verify an AI agent has correctly loaded and understood all rules before proceeding with tasks, potentially leading to inconsistent application.
 
 ### 8. Limited Cross-Referencing
@@ -29,7 +26,7 @@ Some scripts have robust error handling while others could be improved, particul
 ### 11. Lack of Automation for Initial Setup
 While there's a `check_environment.py --fix` command, there's no single command to fully set up the environment from scratch, including installing uv, creating all necessary directories, etc.
 
-### 12. Security Boundary Enforcement
+### 12. Security Boundary Enforcementg (fix given but not verified)
 Security relies primarily on documentation-based rules rather than technical enforcement mechanisms, potentially allowing AI agents to operate outside their designated areas.
 
 ## Usability and Integration Problems
