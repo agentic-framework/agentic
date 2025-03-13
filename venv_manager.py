@@ -646,5 +646,82 @@ def main():
     else:
         parser.print_help()
 
+def list_environments(args):
+    """List registered virtual environments, called by the ag script."""
+    verbose = "--verbose" in args or "-v" in args
+    show_packages = "--packages" in args or "-p" in args
+    return list_venvs(verbose, show_packages)
+
+def create_environment(args):
+    """Create a new virtual environment, called by the ag script."""
+    if len(args) < 2:
+        print("Error: Missing required arguments")
+        print("Usage: ./ag venv create <venv_path> <project_name> [options]")
+        return 1
+    
+    venv_path = args[0]
+    project_name = args[1]
+    
+    # Parse optional arguments
+    python_version = None
+    description = None
+    verify = True
+    
+    i = 2
+    while i < len(args):
+        if args[i] == "--python-version" and i + 1 < len(args):
+            python_version = args[i + 1]
+            i += 2
+        elif args[i] == "--description" and i + 1 < len(args):
+            description = args[i + 1]
+            i += 2
+        elif args[i] == "--no-verify":
+            verify = False
+            i += 1
+        else:
+            i += 1
+    
+    return add_venv(venv_path, project_name, python_version, description, verify)
+
+def remove_environment(args):
+    """Remove a virtual environment, called by the ag script."""
+    venv_path = None
+    project_name = None
+    
+    i = 0
+    while i < len(args):
+        if args[i] == "--venv-path" and i + 1 < len(args):
+            venv_path = args[i + 1]
+            i += 2
+        elif args[i] == "--project-name" and i + 1 < len(args):
+            project_name = args[i + 1]
+            i += 2
+        else:
+            i += 1
+    
+    return remove_venv(venv_path, project_name)
+
+def check_environment(args):
+    """Check a virtual environment, called by the ag script."""
+    venv_path = None
+    project_name = None
+    
+    i = 0
+    while i < len(args):
+        if args[i] == "--venv-path" and i + 1 < len(args):
+            venv_path = args[i + 1]
+            i += 2
+        elif args[i] == "--project-name" and i + 1 < len(args):
+            project_name = args[i + 1]
+            i += 2
+        else:
+            i += 1
+    
+    return check_venv(venv_path, project_name)
+
+def cleanup_environments(args):
+    """Clean up non-existent virtual environments, called by the ag script."""
+    return cleanup_nonexistent()
+
 if __name__ == "__main__":
     main()

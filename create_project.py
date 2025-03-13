@@ -380,5 +380,86 @@ def main():
     
     create_project(args.project_name, args.description, args.license)
 
+def create_project(args):
+    """Create a new project, called by the ag script."""
+    if len(args) < 1:
+        print("Error: Missing required arguments")
+        print("Usage: ./ag project create <project_name> [options]")
+        return 1
+    
+    project_name = args[0]
+    description = "A project created with the Agentic framework"
+    license_type = "MIT"
+    
+    # Parse optional arguments
+    i = 1
+    while i < len(args):
+        if (args[i] == "--description" or args[i] == "-d") and i + 1 < len(args):
+            description = args[i + 1]
+            i += 2
+        elif (args[i] == "--license" or args[i] == "-l") and i + 1 < len(args):
+            license_type = args[i + 1]
+            i += 2
+        else:
+            i += 1
+    
+    return create_project(project_name, description, license_type)
+
+def list_projects(args):
+    """List existing projects, called by the ag script."""
+    if not os.path.exists(PROJECTS_DIR):
+        print(f"Projects directory does not exist: {PROJECTS_DIR}")
+        return 1
+    
+    projects = []
+    for item in os.listdir(PROJECTS_DIR):
+        item_path = os.path.join(PROJECTS_DIR, item)
+        if os.path.isdir(item_path):
+            # Try to get project name and description from README.md
+            readme_path = os.path.join(item_path, "README.md")
+            name = item
+            description = ""
+            
+            if os.path.exists(readme_path):
+                try:
+                    with open(readme_path, 'r') as f:
+                        lines = f.readlines()
+                        if lines and lines[0].startswith('# '):
+                            name = lines[0][2:].strip()
+                        if len(lines) > 1:
+                            description = lines[2].strip()
+                except Exception:
+                    pass
+            
+            # Check if it has a virtual environment
+            venv_path = os.path.join(item_path, ".venv")
+            has_venv = os.path.isdir(venv_path)
+            
+            projects.append({
+                "name": name,
+                "directory": item,
+                "path": item_path,
+                "description": description,
+                "has_venv": has_venv
+            })
+    
+    if not projects:
+        print("No projects found.")
+        return 0
+    
+    print(f"Projects in {PROJECTS_DIR}:")
+    print("-" * 80)
+    
+    for i, project in enumerate(sorted(projects, key=lambda p: p["name"]), 1):
+        venv_status = "\033[92m✓\033[0m" if project["has_venv"] else "\033[91m✗\033[0m"
+        print(f"{i}. {project['name']} ({project['directory']})")
+        if project["description"]:
+            print(f"   Description: {project['description']}")
+        print(f"   Path: {project['path']}")
+        print(f"   Virtual Environment: {venv_status}")
+        print()
+    
+    return 0
+
 if __name__ == "__main__":
     main()

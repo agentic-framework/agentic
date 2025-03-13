@@ -580,5 +580,14 @@ def main():
         
         print("\nRun with --fix flag to attempt automatic fixes: ./check_environment.py --fix")
 
+def check_environment(args):
+    """Function to check the environment setup, called by the ag script."""
+    return main()
+
+def fix_environment(args):
+    """Function to fix common environment issues, called by the ag script."""
+    sys.argv.append("--fix")
+    return main()
+
 if __name__ == "__main__":
     main()
