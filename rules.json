@@ -59,7 +59,7 @@
     "project_management": {
       "initialization": {
         "required_files": ["README.md", "LICENSE", ".gitignore"],
-        "creation_command": "./create_project.py \"Project Name\" --description \"Description\""
+        "creation_command": "./ag project create \"Project Name\" --description \"Description\""
       },
       "documentation": {
         "code_style": "Google style docstrings",
@@ -171,12 +171,12 @@
     }
   },
   "utility_scripts": {
-    "check_environment.py": {
+    "env": {
       "purpose": "Verify that the environment is set up correctly",
-      "usage": "./check_environment.py [--fix]",
+      "usage": "./ag env check [--fix]",
       "checks": ["UV installation", "Directory structure", "Registry file", "Utility scripts", "Python installations", "Virtual environments", "Disk space"]
     },
-    "venv_manager.py": {
+    "venv": {
       "purpose": "Manage Python virtual environments registry",
       "commands": {
         "list": "List all registered virtual environments",
@@ -189,11 +189,11 @@
         "backup": "Create a backup of the registry file"
       }
     },
-    "create_project.py": {
+    "project": {
       "purpose": "Create new projects with the standard structure",
-      "usage": "./create_project.py \"Project Name\" [--description \"Description\"] [--license License]"
+      "usage": "./ag project create \"Project Name\" [--description \"Description\"] [--license License]"
     },
-    "uv_manager.py": {
+    "uv": {
       "purpose": "Install and manage uv and Python",
       "commands": {
         "install": "Install uv",
@@ -207,10 +207,10 @@
         "clean-cache": "Clean the uv cache"
       }
     },
-    "cleanup_manager.py": {
+    "cleanup": {
       "purpose": "Clean up temporary files and maintain the directory structure",
       "commands": {
-        "cleanup-tmp": "Clean up temporary files older than 7 days",
+        "tmp": "Clean up temporary files older than 7 days",
         "check-orphaned-venvs": "Check for orphaned virtual environments",
         "check-structure": "Check the directory structure",
         "disk-usage": "Analyze disk usage"
