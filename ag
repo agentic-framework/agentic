@@ -239,6 +239,36 @@ COMMAND_STRUCTURE = {
                 "function": "list_categories"
             }
         }
+    },
+    "setup": {
+        "description": "Setup commands for the Agentic framework",
+        "subcommands": {
+            "install-dependencies": {
+                "description": "Install required dependencies",
+                "module": "setup",
+                "function": "install_dependencies"
+            },
+            "create-directories": {
+                "description": "Create the required directory structure",
+                "module": "setup",
+                "function": "create_directories"
+            },
+            "initialize-registry": {
+                "description": "Initialize the virtual environment registry",
+                "module": "setup",
+                "function": "initialize_registry"
+            },
+            "make-scripts-executable": {
+                "description": "Make utility scripts executable",
+                "module": "setup",
+                "function": "make_scripts_executable"
+            },
+            "all": {
+                "description": "Run all setup steps",
+                "module": "setup",
+                "function": "setup_all"
+            }
+        }
     }
 }
 

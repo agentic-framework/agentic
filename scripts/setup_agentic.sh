@@ -1,10 +1,19 @@
 #!/bin/bash
 # setup_agentic.sh
 #
+# DEPRECATED: This script is deprecated. Please use the new 'ag setup' commands instead.
+#
+# New usage:
+#   ./ag setup all                    # Run all setup steps
+#   ./ag setup install-dependencies   # Install required dependencies
+#   ./ag setup create-directories     # Create the required directory structure
+#   ./ag setup initialize-registry    # Initialize the virtual environment registry
+#   ./ag setup make-scripts-executable # Make utility scripts executable
+#
 # This script provides a comprehensive setup for the Agentic framework.
 # It can install dependencies, create all necessary directories, and initialize the registry.
 #
-# Usage:
+# Legacy usage:
 #   ./setup_agentic.sh [options]
 #
 # Options:
@@ -15,6 +24,19 @@
 #   --help                    Display this help message
 
 set -e  # Exit immediately if a command exits with a non-zero status
+
+# Display deprecation warning
+echo -e "\033[1;33mWARNING: This script is deprecated.\033[0m"
+echo -e "\033[1;33mPlease use the new 'ag setup' commands instead:\033[0m"
+echo -e "  ./ag setup all                     # Run all setup steps"
+echo -e "  ./ag setup install-dependencies    # Install required dependencies"
+echo -e "  ./ag setup create-directories      # Create the required directory structure"
+echo -e "  ./ag setup initialize-registry     # Initialize the virtual environment registry"
+echo -e "  ./ag setup make-scripts-executable # Make utility scripts executable"
+echo ""
+echo -e "\033[1;33mContinuing with legacy script in 5 seconds...\033[0m"
+sleep 5
+echo ""
 
 # ANSI color codes
 RED='\033[0;31m'

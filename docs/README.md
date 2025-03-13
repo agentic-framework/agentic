@@ -287,11 +287,11 @@ The Agentic framework includes several key features to ensure robustness and rel
 To work with this framework:
 
 1. Clone this repository
-2. Run the setup script to fully set up the environment:
+2. Run the setup command to fully set up the environment:
    ```bash
-   ./scripts/setup_agentic.sh
+   ./ag setup all
    ```
-   This script will:
+   This command will:
    - Install required dependencies (uv)
    - Create all necessary directories
    - Initialize the virtual environment registry
@@ -300,16 +300,19 @@ To work with this framework:
    You can also run specific setup steps:
    ```bash
    # Install dependencies only
-   ./scripts/setup_agentic.sh --install-dependencies
+   ./ag setup install-dependencies
    
    # Create directories only
-   ./scripts/setup_agentic.sh --create-directories
+   ./ag setup create-directories
    
    # Initialize registry only
-   ./scripts/setup_agentic.sh --initialize-registry
+   ./ag setup initialize-registry
+   
+   # Make scripts executable
+   ./ag setup make-scripts-executable
    ```
 
-   If you encounter issues with the automated setup script (particularly network-related issues when installing dependencies), you can follow the [Manual Setup Guide](MANUAL_SETUP.md) to set up the environment manually.
+   If you encounter issues with the automated setup (particularly network-related issues when installing dependencies), you can follow the [Manual Setup Guide](MANUAL_SETUP.md) to set up the environment manually.
 
 3. Run `./ag env check` to verify the environment is set up correctly
 4. Read the [Human Guide](HUMAN_GUIDE.md) for detailed instructions on how to use the framework

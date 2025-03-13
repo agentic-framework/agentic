@@ -35,8 +35,22 @@ As a human user, you should be familiar with this guide and the README, but you 
 To set up the Agentic framework:
 
 1. Clone the repository to your machine
-2. Run `./scripts/setup_agentic.sh` to fully set up the environment
-   - This will install dependencies, create necessary directories, and initialize the registry
+2. Run `./ag setup all` to fully set up the environment
+   - This will install dependencies, create necessary directories, initialize the registry, and make scripts executable
+   - You can also run specific setup steps:
+     ```bash
+     # Install dependencies only
+     ./ag setup install-dependencies
+     
+     # Create directories only
+     ./ag setup create-directories
+     
+     # Initialize registry only
+     ./ag setup initialize-registry
+     
+     # Make scripts executable
+     ./ag setup make-scripts-executable
+     ```
    - If you encounter issues with the automated setup (particularly network-related issues), follow the [Manual Setup Guide](MANUAL_SETUP.md) instead
 3. Run `./ag env check` to verify the environment is set up correctly
 4. Review this guide to understand how to use the framework
