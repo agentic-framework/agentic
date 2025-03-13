@@ -38,18 +38,24 @@ The Agentic framework has a specific directory structure that separates the git-
 $HOME/
 └── Agentic/                  # Root Agentic folder (not under version control)
     ├── agentic/              # Git-managed repository folder (under version control)
-    │   ├── README.md         # Framework overview
-    │   ├── AGENT_RULES.md    # Comprehensive rules for AI agents
-    │   ├── AGENT_QUICK_REFERENCE.md  # Quick reference for AI agents
-    │   ├── HUMAN_GUIDE.md    # Guide for human users
-    │   ├── DIRECTORY_STRUCTURE.md  # Directory structure documentation
-    │   ├── CONSOLIDATED_DOCS.md  # This file
+    │   ├── docs/             # Documentation files
+    │   │   ├── README.md     # Framework overview
+    │   │   ├── AGENT_RULES.md  # Comprehensive rules for AI agents
+    │   │   ├── AGENT_QUICK_REFERENCE.md  # Quick reference for AI agents
+    │   │   ├── HUMAN_GUIDE.md  # Guide for human users
+    │   │   ├── DIRECTORY_STRUCTURE.md  # Directory structure documentation
+    │   │   ├── LESSON_LEARNED.md  # Lessons learned during development
+    │   │   └── CONSOLIDATED_DOCS.md  # This file
+    │   ├── scripts/          # Utility scripts
+    │   │   ├── check_environment.py  # Environment verification script
+    │   │   ├── venv_manager.py  # Virtual environment management script
+    │   │   ├── create_project.py  # Project creation script
+    │   │   ├── uv_manager.py  # UV package manager script
+    │   │   └── cleanup_manager.py  # Cleanup and maintenance script
     │   ├── ag                # Main command-line interface
-    │   ├── check_environment.py  # Environment verification script (legacy)
-    │   ├── venv_manager.py   # Virtual environment management script (legacy)
-    │   ├── create_project.py # Project creation script (legacy)
-    │   ├── uv_manager.py     # UV package manager script (legacy)
-    │   └── cleanup_manager.py  # Cleanup and maintenance script (legacy)
+    │   ├── LICENSE           # License file
+    │   ├── rules.json        # Structured rules in machine-readable format
+    │   └── agentic_info.json # Framework configuration
     │
     ├── projects/             # All agent-created projects (not under version control)
     ├── shared/               # Shared resources between projects (not under version control)
@@ -74,7 +80,7 @@ $HOME/
 
 - **Purpose**: Contains the core framework code, documentation, and utility scripts
 - **Version Control**: Under git version control
-- **Content**: Contains documentation files and utility scripts
+- **Content**: Organized into `docs/` (documentation files) and `scripts/` (utility scripts) directories
 - **Management**: Managed through git commands (pull, push, commit, etc.)
 - **Path Reference**: Always referenced as `$HOME/Agentic/agentic` in documentation and scripts
 
@@ -250,93 +256,93 @@ PROJECTS_DIR = os.path.join(AGENTIC_DIR, "projects")  # This would incorrectly p
 
 The Agentic framework includes several utility scripts to help agents follow the rules and manage the environment:
 
-### Security Enforcement (`security.py`)
+### Security Enforcement (`scripts/security.py`)
 
-The `security.py` script provides technical enforcement mechanisms to ensure AI agents operate only within their designated areas:
+The `scripts/security.py` script provides technical enforcement mechanisms to ensure AI agents operate only within their designated areas:
 
 ```bash
 # Check if a path is allowed
-./security.py check-path /path/to/check
+./scripts/security.py check-path /path/to/check
 
 # Validate a command for execution
-./security.py validate-command "command to validate"
+./scripts/security.py validate-command "command to validate"
 
 # Scan a file for potential security violations
-./security.py scan-file /path/to/file
+./scripts/security.py scan-file /path/to/file
 
 # Calculate the SHA-256 hash of a file
-./security.py hash-file /path/to/file
+./scripts/security.py hash-file /path/to/file
 
 # Verify the integrity of a file
-./security.py verify-integrity /path/to/file expected-hash
+./scripts/security.py verify-integrity /path/to/file expected-hash
 ```
 
 This script enforces security boundaries, validates operations, and logs security events. It helps prevent AI agents from accessing or modifying files outside their designated areas.
 
-### Configuration Management (`config.py`)
+### Configuration Management (`scripts/config.py`)
 
-The `config.py` script provides a centralized configuration system for the Agentic framework:
+The `scripts/config.py` script provides a centralized configuration system for the Agentic framework:
 
 ```bash
 # Get a configuration value
-./config.py get paths.agentic_root
+./scripts/config.py get paths.agentic_root
 
 # Set a configuration value
-./config.py set python.default_python_version 3.12
+./scripts/config.py set python.default_python_version 3.12
 
 # List all configuration values
-./config.py list
+./scripts/config.py list
 
 # List a specific section
-./config.py list --section paths
+./scripts/config.py list --section paths
 
 # Check if a path is allowed
-./config.py check /path/to/check
+./scripts/config.py check /path/to/check
 
 # Reset configuration to defaults
-./config.py reset
+./scripts/config.py reset
 ```
 
 This script provides a standardized API for accessing configuration values and handles path variability across different installations. All other scripts in the framework use this configuration system to ensure consistency.
 
-### Rule Loading and Verification (`rule_loader.py`)
+### Rule Loading and Verification (`scripts/rule_loader.py`)
 
-The `rule_loader.py` script provides utilities for loading, verifying, and querying the Agentic framework rules:
+The `scripts/rule_loader.py` script provides utilities for loading, verifying, and querying the Agentic framework rules:
 
 ```bash
 # Verify an AI agent's understanding of the rules
-./rule_loader.py verify
+./scripts/rule_loader.py verify
 
 # Run verification in non-interactive mode
-./rule_loader.py verify --non-interactive
+./scripts/rule_loader.py verify --non-interactive
 
 # Save verification results to a file
-./rule_loader.py verify --output /path/to/results.json
+./scripts/rule_loader.py verify --output /path/to/results.json
 
 # Query specific rules
-./rule_loader.py query python_environment
-./rule_loader.py query python_environment --subcategory virtual_environments
-./rule_loader.py query python_environment --subcategory virtual_environments --key location
+./scripts/rule_loader.py query python_environment
+./scripts/rule_loader.py query python_environment --subcategory virtual_environments
+./scripts/rule_loader.py query python_environment --subcategory virtual_environments --key location
 
 # List rule categories
-./rule_loader.py list
+./scripts/rule_loader.py list
 
 # List utility scripts
-./rule_loader.py list --utility-scripts
+./scripts/rule_loader.py list --utility-scripts
 ```
 
 This script uses a structured rules file (`rules.json`) that contains all the framework rules in a machine-readable format, enabling programmatic access and verification.
 
-### Environment Check (`check_environment.py`)
+### Environment Check (`scripts/check_environment.py`)
 
-The `check_environment.py` script verifies that the environment is set up correctly:
+The `scripts/check_environment.py` script verifies that the environment is set up correctly:
 
 ```bash
 # Run a complete environment check
-./check_environment.py
+./scripts/check_environment.py
 
 # Run environment check and automatically fix common issues
-./check_environment.py --fix
+./scripts/check_environment.py --fix
 ```
 
 This script checks:
@@ -348,113 +354,113 @@ This script checks:
 - Virtual environments
 - Disk space
 
-### Virtual Environment Management (`venv_manager.py`)
+### Virtual Environment Management (`scripts/venv_manager.py`)
 
-The `venv_manager.py` script helps manage Python virtual environments:
+The `scripts/venv_manager.py` script helps manage Python virtual environments:
 
 ```bash
 # List all registered virtual environments
-./venv_manager.py list
+./scripts/venv_manager.py list
 
 # List with detailed information
-./venv_manager.py list --verbose
+./scripts/venv_manager.py list --verbose
 
 # List with package information
-./venv_manager.py list --packages
+./scripts/venv_manager.py list --packages
 
 # Add a virtual environment to the registry
-./venv_manager.py add /path/to/venv project-name
+./scripts/venv_manager.py add /path/to/venv project-name
 
 # Add with additional information
-./venv_manager.py add /path/to/venv project-name --description "Description" --python-version "3.12.9"
+./scripts/venv_manager.py add /path/to/venv project-name --description "Description" --python-version "3.12.9"
 
 # Remove a virtual environment from the registry
-./venv_manager.py remove --project-name project-name
-./venv_manager.py remove --venv-path /path/to/venv
+./scripts/venv_manager.py remove --project-name project-name
+./scripts/venv_manager.py remove --venv-path /path/to/venv
 
 # Check if a virtual environment is registered and verify its status
-./venv_manager.py check --project-name project-name
-./venv_manager.py check --venv-path /path/to/venv
+./scripts/venv_manager.py check --project-name project-name
+./scripts/venv_manager.py check --venv-path /path/to/venv
 
 # Update the package list for a virtual environment
-./venv_manager.py update-packages --project-name project-name
+./scripts/venv_manager.py update-packages --project-name project-name
 
 # Clean up non-existent virtual environments
-./venv_manager.py cleanup
+./scripts/venv_manager.py cleanup
 
 # Scan for and repair the registry
-./venv_manager.py repair
+./scripts/venv_manager.py repair
 
 # Create a backup of the registry
-./venv_manager.py backup
+./scripts/venv_manager.py backup
 ```
 
-### Project Creation (`create_project.py`)
+### Project Creation (`scripts/create_project.py`)
 
-The `create_project.py` script creates new projects with the standard structure:
+The `scripts/create_project.py` script creates new projects with the standard structure:
 
 ```bash
 # Create a new project
-./create_project.py "My New Project" --description "A description of the project"
+./scripts/create_project.py "My New Project" --description "A description of the project"
 
 # Create a new project with a specific license
-./create_project.py "My New Project" --license Apache-2.0
+./scripts/create_project.py "My New Project" --license Apache-2.0
 ```
 
-### UV Package Manager (`uv_manager.py`)
+### UV Package Manager (`scripts/uv_manager.py`)
 
-The `uv_manager.py` script helps with installing and managing uv:
+The `scripts/uv_manager.py` script helps with installing and managing uv:
 
 ```bash
 # Install uv
-./uv_manager.py install
+./scripts/uv_manager.py install
 
 # Update uv
-./uv_manager.py update
+./scripts/uv_manager.py update
 
 # List available Python versions
-./uv_manager.py list-python
+./scripts/uv_manager.py list-python
 
 # Install a specific Python version
-./uv_manager.py install-python 3.11
+./scripts/uv_manager.py install-python 3.11
 
 # Create a virtual environment
-./uv_manager.py create-venv /path/to/venv --python 3.11
+./scripts/uv_manager.py create-venv /path/to/venv --python 3.11
 
 # Create with custom timeout and retries
-./uv_manager.py create-venv /path/to/venv --python 3.11 --timeout 600 --retries 5
+./scripts/uv_manager.py create-venv /path/to/venv --python 3.11 --timeout 600 --retries 5
 
 # Install dependencies in a virtual environment
-./uv_manager.py install-deps /path/to/venv --requirements requirements.txt
-./uv_manager.py install-deps /path/to/venv --packages numpy pandas matplotlib
+./scripts/uv_manager.py install-deps /path/to/venv --requirements requirements.txt
+./scripts/uv_manager.py install-deps /path/to/venv --packages numpy pandas matplotlib
 
 # Install a project in editable mode
-./uv_manager.py install-editable /path/to/venv /path/to/project
+./scripts/uv_manager.py install-editable /path/to/venv /path/to/project
 
 # Show information about uv
-./uv_manager.py info
+./scripts/uv_manager.py info
 
 # Clean the uv cache
-./uv_manager.py clean-cache
-./uv_manager.py clean-cache --older-than 30
+./scripts/uv_manager.py clean-cache
+./scripts/uv_manager.py clean-cache --older-than 30
 ```
 
-### Cleanup and Maintenance (`cleanup_manager.py`)
+### Cleanup and Maintenance (`scripts/cleanup_manager.py`)
 
-The `cleanup_manager.py` script helps with cleaning up temporary files and maintaining the directory structure:
+The `scripts/cleanup_manager.py` script helps with cleaning up temporary files and maintaining the directory structure:
 
 ```bash
 # Clean up temporary files older than 7 days
-./cleanup_manager.py cleanup-tmp
+./scripts/cleanup_manager.py cleanup-tmp
 
 # Check for orphaned virtual environments
-./cleanup_manager.py check-orphaned-venvs
+./scripts/cleanup_manager.py check-orphaned-venvs
 
 # Check the directory structure
-./cleanup_manager.py check-structure
+./scripts/cleanup_manager.py check-structure
 
 # Analyze disk usage
-./cleanup_manager.py disk-usage
+./scripts/cleanup_manager.py disk-usage
 ```
 
 ## Agent Operation Guidelines
@@ -562,7 +568,7 @@ To work with this framework:
 1. Clone this repository
 2. Run the setup script to fully set up the environment:
    ```bash
-   ./setup_agentic.sh
+   ./scripts/setup_agentic.sh
    ```
    This script will:
    - Install required dependencies (uv)
@@ -573,13 +579,13 @@ To work with this framework:
    You can also run specific setup steps:
    ```bash
    # Install dependencies only
-   ./setup_agentic.sh --install-dependencies
+   ./scripts/setup_agentic.sh --install-dependencies
    
    # Create directories only
-   ./setup_agentic.sh --create-directories
+   ./scripts/setup_agentic.sh --create-directories
    
    # Initialize registry only
-   ./setup_agentic.sh --initialize-registry
+   ./scripts/setup_agentic.sh --initialize-registry
    ```
 
    If you encounter issues with the automated setup script (particularly network-related issues when installing dependencies), you can follow the [Manual Setup Guide](MANUAL_SETUP.md) to set up the environment manually.
@@ -601,5 +607,6 @@ This consolidated document includes information from the following files:
 - [HUMAN_GUIDE.md](HUMAN_GUIDE.md) - Detailed instructions for human users
 - [DIRECTORY_STRUCTURE.md](DIRECTORY_STRUCTURE.md) - Explanation of the directory structure
 - [MANUAL_SETUP.md](MANUAL_SETUP.md) - Step-by-step instructions for manual setup
+- [LESSON_LEARNED.md](LESSON_LEARNED.md) - Important lessons learned during development and maintenance
 
 When performing tasks, refer to this consolidated document to ensure all relevant information is considered.

@@ -13,7 +13,7 @@ Agentic is a framework that allows AI agents (like Claude, GPT, etc.) to operate
 
 ## Documentation Structure
 
-The Agentic framework documentation is organized into three main sections:
+The Agentic framework documentation is organized into four main sections:
 
 1. **For Humans**: 
    - This guide (HUMAN_GUIDE.md)
@@ -25,14 +25,17 @@ The Agentic framework documentation is organized into three main sections:
 3. **For Agents (Quick Reference)**: 
    - [Agent Quick Reference Guide](AGENT_QUICK_REFERENCE.md) - Concise summary for common tasks
 
-As a human user, you should be familiar with this guide and the README, but you don't need to memorize the agent-focused documents.
+4. **Development and Maintenance**: 
+   - [Lessons Learned](LESSON_LEARNED.md) - Important lessons learned during development and maintenance
+
+As a human user, you should be familiar with this guide and the README, but you don't need to memorize the agent-focused documents. The Lessons Learned document can be particularly useful when you encounter issues with git operations or other development tasks.
 
 ## Getting Started
 
 To set up the Agentic framework:
 
 1. Clone the repository to your machine
-2. Run `./setup_agentic.sh` to fully set up the environment
+2. Run `./scripts/setup_agentic.sh` to fully set up the environment
    - This will install dependencies, create necessary directories, and initialize the registry
    - If you encounter issues with the automated setup (particularly network-related issues), follow the [Manual Setup Guide](MANUAL_SETUP.md) instead
 3. Run `./ag env check` to verify the environment is set up correctly
@@ -47,7 +50,7 @@ When working with AI agents, you need to instruct them to use the Agentic framew
 For tasks that require comprehensive understanding of the framework:
 
 ```
-Read the Agentic framework located at $HOME/Agentic to load your rules and tools. Start by examining the README.md and AGENT_RULES.md files in the agentic subdirectory. Then help me with [your task].
+Read the Agentic framework located at $HOME/Agentic to load your rules and tools. Start by examining the docs/README.md and docs/AGENT_RULES.md files in the agentic subdirectory. Then help me with [your task].
 ```
 
 This instructs the agent to read and understand all the rules and guidelines before proceeding with your task.
@@ -57,7 +60,7 @@ This instructs the agent to read and understand all the rules and guidelines bef
 For simpler tasks where the agent doesn't need the full ruleset:
 
 ```
-Read the Agentic framework located at $HOME/Agentic to load your rules and tools. Focus on the AGENT_QUICK_REFERENCE.md file in the agentic subdirectory. Then help me with [your task].
+Read the Agentic framework located at $HOME/Agentic to load your rules and tools. Focus on the docs/AGENT_QUICK_REFERENCE.md file in the agentic subdirectory. Then help me with [your task].
 ```
 
 This instructs the agent to use the quick reference guide, which is more concise.
@@ -67,25 +70,25 @@ This instructs the agent to use the quick reference guide, which is more concise
 #### Creating a New Project
 
 ```
-Read the Agentic framework located at $HOME/Agentic to load your rules and tools. Start by examining the README.md and AGENT_RULES.md files in the agentic subdirectory. Then create a new Python project called [project name].
+Read the Agentic framework located at $HOME/Agentic to load your rules and tools. Start by examining the docs/README.md and docs/AGENT_RULES.md files in the agentic subdirectory. Then create a new Python project called [project name].
 ```
 
 #### Working with Virtual Environments
 
 ```
-Read the Agentic framework located at $HOME/Agentic to load your rules and tools. Start by examining the README.md and AGENT_RULES.md files in the agentic subdirectory. Then create a Python [version] virtual environment for [project name].
+Read the Agentic framework located at $HOME/Agentic to load your rules and tools. Start by examining the docs/README.md and docs/AGENT_RULES.md files in the agentic subdirectory. Then create a Python [version] virtual environment for [project name].
 ```
 
 #### Managing Existing Projects
 
 ```
-Read the Agentic framework located at $HOME/Agentic to load your rules and tools. Start by examining the README.md and AGENT_RULES.md files in the agentic subdirectory. Then help me update dependencies for [project name].
+Read the Agentic framework located at $HOME/Agentic to load your rules and tools. Start by examining the docs/README.md and docs/AGENT_RULES.md files in the agentic subdirectory. Then help me update dependencies for [project name].
 ```
 
 #### Troubleshooting
 
 ```
-Read the Agentic framework located at $HOME/Agentic to load your rules and tools. Start by examining the README.md and AGENT_RULES.md files in the agentic subdirectory. Then help me diagnose issues with [project name].
+Read the Agentic framework located at $HOME/Agentic to load your rules and tools. Start by examining the docs/README.md and docs/AGENT_RULES.md files in the agentic subdirectory. Then help me diagnose issues with [project name].
 ```
 
 ## Best Practices for Working with AI Agents
@@ -148,7 +151,7 @@ If you encounter issues with the Agentic framework:
 3. Check the logs in `$HOME/Agentic/logs/` for more information
 4. Ask an AI agent to help diagnose the issue:
    ```
-   Read the Agentic framework located at $HOME/Agentic to load your rules and tools. Start by examining the README.md and AGENT_RULES.md files in the agentic subdirectory. Then help me diagnose why [issue description].
+   Read the Agentic framework located at $HOME/Agentic to load your rules and tools. Start by examining the docs/README.md and docs/AGENT_RULES.md files in the agentic subdirectory. Then help me diagnose why [issue description].
    ```
 
 ## Security Considerations
@@ -169,7 +172,7 @@ You can customize the Agentic framework to suit your needs:
 
 1. **Adding Rules**: You can add or modify rules in the AGENT_RULES.md file.
 
-2. **Custom Scripts**: You can create custom utility scripts in the `$HOME/Agentic/agentic/` directory.
+2. **Custom Scripts**: You can create custom utility scripts in the `$HOME/Agentic/agentic/scripts/` directory.
 
 3. **Directory Structure**: You can modify the directory structure to suit your workflow.
 

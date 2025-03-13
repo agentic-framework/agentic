@@ -49,7 +49,7 @@ EOF
 Make all the utility scripts executable:
 
 ```bash
-chmod +x $HOME/Agentic/agentic/*.py $HOME/Agentic/agentic/*.sh
+chmod +x $HOME/Agentic/agentic/scripts/*.py $HOME/Agentic/agentic/scripts/*.sh
 ```
 
 ### 4. Verify the Setup

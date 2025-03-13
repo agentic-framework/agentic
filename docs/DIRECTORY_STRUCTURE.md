@@ -8,17 +8,24 @@ This document provides a clear explanation of the Agentic framework's directory 
 $HOME/
 └── Agentic/                  # Root Agentic folder (not under version control)
     ├── agentic/              # Git-managed repository folder (under version control)
-    │   ├── README.md         # Framework overview
-    │   ├── AGENT_RULES.md    # Comprehensive rules for AI agents
-    │   ├── AGENT_QUICK_REFERENCE.md  # Quick reference for AI agents
-    │   ├── HUMAN_GUIDE.md    # Guide for human users
-    │   ├── DIRECTORY_STRUCTURE.md  # This file
+    │   ├── docs/             # Documentation files
+    │   │   ├── README.md     # Framework overview
+    │   │   ├── AGENT_RULES.md  # Comprehensive rules for AI agents
+    │   │   ├── AGENT_QUICK_REFERENCE.md  # Quick reference for AI agents
+    │   │   ├── HUMAN_GUIDE.md  # Guide for human users
+    │   │   ├── DIRECTORY_STRUCTURE.md  # This file
+    │   │   ├── LESSON_LEARNED.md  # Lessons learned during development
+    │   │   └── CONSOLIDATED_DOCS.md  # Consolidated documentation
+    │   ├── scripts/          # Utility scripts
+    │   │   ├── check_environment.py  # Environment verification script
+    │   │   ├── venv_manager.py  # Virtual environment management script
+    │   │   ├── create_project.py  # Project creation script
+    │   │   ├── uv_manager.py  # UV package manager script
+    │   │   └── cleanup_manager.py  # Cleanup and maintenance script
     │   ├── ag                # Main command-line interface
-    │   ├── check_environment.py  # Environment verification script (legacy)
-    │   ├── venv_manager.py   # Virtual environment management script (legacy)
-    │   ├── create_project.py # Project creation script (legacy)
-    │   ├── uv_manager.py     # UV package manager script (legacy)
-    │   └── cleanup_manager.py  # Cleanup and maintenance script (legacy)
+    │   ├── LICENSE           # License file
+    │   ├── rules.json        # Structured rules in machine-readable format
+    │   └── agentic_info.json # Framework configuration
     │
     ├── projects/             # All agent-created projects (not under version control)
     ├── shared/               # Shared resources between projects (not under version control)
@@ -43,7 +50,7 @@ $HOME/
 
 - **Purpose**: Contains the core framework code, documentation, and utility scripts
 - **Version Control**: Under git version control
-- **Content**: Contains documentation files and utility scripts
+- **Content**: Organized into `docs/` (documentation files) and `scripts/` (utility scripts) directories
 - **Management**: Managed through git commands (pull, push, commit, etc.)
 - **Path Reference**: Always referenced as `$HOME/Agentic/agentic` in documentation and scripts
 
@@ -97,7 +104,9 @@ PROJECTS_DIR = os.path.join(AGENTIC_DIR, "projects")  # This would incorrectly p
 $HOME/Agentic/                  <-- Root Agentic folder (not git-managed)
 │
 ├── agentic/                    <-- Git repository (git-managed)
-│   └── [framework files]
+│   ├── docs/                   <-- Documentation files
+│   ├── scripts/                <-- Utility scripts
+│   └── ag                      <-- Main CLI interface
 │
 └── [other directories]         <-- Not git-managed
 ```
