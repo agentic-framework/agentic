@@ -18,12 +18,27 @@
     "cache": "$HOME/Agentic/cache",
     "backups": "$HOME/Agentic/backups"
   },
-  "utility_scripts": {
-    "check_environment": "$HOME/Agentic/agentic/check_environment.py",
-    "venv_manager": "$HOME/Agentic/agentic/venv_manager.py",
-    "uv_manager": "$HOME/Agentic/agentic/uv_manager.py",
-    "create_project": "$HOME/Agentic/agentic/create_project.py",
-    "cleanup_manager": "$HOME/Agentic/agentic/cleanup_manager.py"
+  "utility_commands": {
+    "env": {
+      "script": "$HOME/Agentic/agentic/check_environment.py",
+      "usage": "./ag env check [--fix]"
+    },
+    "venv": {
+      "script": "$HOME/Agentic/agentic/venv_manager.py",
+      "usage": "./ag venv [subcommand] [args]"
+    },
+    "uv": {
+      "script": "$HOME/Agentic/agentic/uv_manager.py",
+      "usage": "./ag uv [subcommand] [args]"
+    },
+    "project": {
+      "script": "$HOME/Agentic/agentic/create_project.py",
+      "usage": "./ag project create [name] [options]"
+    },
+    "cleanup": {
+      "script": "$HOME/Agentic/agentic/cleanup_manager.py",
+      "usage": "./ag cleanup [subcommand] [args]"
+    }
   },
   "registry": {
     "path": "$HOME/Agentic/venv_registry.json",
