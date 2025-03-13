@@ -42,91 +42,91 @@ This repository includes several utility scripts to help agents follow the rules
 
 ### Security Enforcement
 
-The `scripts/security.py` script provides technical enforcement mechanisms to ensure AI agents operate only within their designated areas:
+The security commands provide technical enforcement mechanisms to ensure AI agents operate only within their designated areas:
 
 ```bash
 # Check if a path is allowed
-./scripts/security.py check-path /path/to/check
+./ag security check-path /path/to/check
 
 # Validate a command for execution
-./scripts/security.py validate-command "command to validate"
+./ag security validate-command "command to validate"
 
 # Scan a file for potential security violations
-./scripts/security.py scan-file /path/to/file
+./ag security scan-file /path/to/file
 
 # Calculate the SHA-256 hash of a file
-./scripts/security.py hash-file /path/to/file
+./ag security hash-file /path/to/file
 
 # Verify the integrity of a file
-./scripts/security.py verify-integrity /path/to/file expected-hash
+./ag security verify-integrity /path/to/file expected-hash
 ```
 
 This script enforces security boundaries, validates operations, and logs security events. It helps prevent AI agents from accessing or modifying files outside their designated areas.
 
 ### Configuration Management
 
-The `scripts/config.py` script provides a centralized configuration system for the Agentic framework:
+The config commands provide a centralized configuration system for the Agentic framework:
 
 ```bash
 # Get a configuration value
-./scripts/config.py get paths.agentic_root
+./ag config get paths.agentic_root
 
 # Set a configuration value
-./scripts/config.py set python.default_python_version 3.12
+./ag config set python.default_python_version 3.12
 
 # List all configuration values
-./scripts/config.py list
+./ag config list
 
 # List a specific section
-./scripts/config.py list --section paths
+./ag config list --section paths
 
 # Check if a path is allowed
-./scripts/config.py check /path/to/check
+./ag config check /path/to/check
 
 # Reset configuration to defaults
-./scripts/config.py reset
+./ag config reset
 ```
 
 This script provides a standardized API for accessing configuration values and handles path variability across different installations. All other scripts in the framework use this configuration system to ensure consistency.
 
 ### Rule Loading and Verification
 
-The `scripts/rule_loader.py` script provides utilities for loading, verifying, and querying the Agentic framework rules:
+The rule commands provide utilities for loading, verifying, and querying the Agentic framework rules:
 
 ```bash
 # Verify an AI agent's understanding of the rules
-./scripts/rule_loader.py verify
+./ag rule verify
 
 # Run verification in non-interactive mode
-./scripts/rule_loader.py verify --non-interactive
+./ag rule verify --non-interactive
 
 # Save verification results to a file
-./scripts/rule_loader.py verify --output /path/to/results.json
+./ag rule verify --output /path/to/results.json
 
 # Query specific rules
-./scripts/rule_loader.py query python_environment
-./scripts/rule_loader.py query python_environment --subcategory virtual_environments
-./scripts/rule_loader.py query python_environment --subcategory virtual_environments --key location
+./ag rule query python_environment
+./ag rule query python_environment --subcategory virtual_environments
+./ag rule query python_environment --subcategory virtual_environments --key location
 
 # List rule categories
-./scripts/rule_loader.py list
+./ag rule list
 
 # List utility scripts
-./scripts/rule_loader.py list --utility-scripts
+./ag rule list --utility-scripts
 ```
 
 This script uses a structured rules file (`rules.json`) that contains all the framework rules in a machine-readable format, enabling programmatic access and verification.
 
 ### Environment Check
 
-The `scripts/check_environment.py` script verifies that the environment is set up correctly:
+The env commands verify that the environment is set up correctly:
 
 ```bash
 # Run a complete environment check
-./scripts/check_environment.py
+./ag env check
 
 # Run environment check and automatically fix common issues
-./scripts/check_environment.py --fix
+./ag env fix
 ```
 
 This script checks:
@@ -140,111 +140,111 @@ This script checks:
 
 ### Virtual Environment Management
 
-The `scripts/venv_manager.py` script helps manage Python virtual environments:
+The venv commands help manage Python virtual environments:
 
 ```bash
 # List all registered virtual environments
-./scripts/venv_manager.py list
+./ag venv list
 
 # List with detailed information
-./scripts/venv_manager.py list --verbose
+./ag venv list --verbose
 
 # List with package information
-./scripts/venv_manager.py list --packages
+./ag venv list --packages
 
 # Add a virtual environment to the registry
-./scripts/venv_manager.py add /path/to/venv project-name
+./ag venv add /path/to/venv project-name
 
 # Add with additional information
-./scripts/venv_manager.py add /path/to/venv project-name --description "Description" --python-version "3.12.9"
+./ag venv add /path/to/venv project-name --description "Description" --python-version "3.12.9"
 
 # Remove a virtual environment from the registry
-./scripts/venv_manager.py remove --project-name project-name
-./scripts/venv_manager.py remove --venv-path /path/to/venv
+./ag venv remove --project-name project-name
+./ag venv remove --venv-path /path/to/venv
 
 # Check if a virtual environment is registered and verify its status
-./scripts/venv_manager.py check --project-name project-name
-./scripts/venv_manager.py check --venv-path /path/to/venv
+./ag venv check --project-name project-name
+./ag venv check --venv-path /path/to/venv
 
 # Update the package list for a virtual environment
-./scripts/venv_manager.py update-packages --project-name project-name
+./ag venv update-packages --project-name project-name
 
 # Clean up non-existent virtual environments
-./scripts/venv_manager.py cleanup
+./ag venv cleanup
 
 # Scan for and repair the registry
-./scripts/venv_manager.py repair
+./ag venv repair
 
 # Create a backup of the registry
-./scripts/venv_manager.py backup
+./ag venv backup
 ```
 
 ### Project Creation
 
-The `scripts/create_project.py` script creates new projects with the standard structure:
+The project commands create new projects with the standard structure:
 
 ```bash
 # Create a new project
-./scripts/create_project.py "My New Project" --description "A description of the project"
+./ag project create "My New Project" --description "A description of the project"
 
 # Create a new project with a specific license
-./scripts/create_project.py "My New Project" --license Apache-2.0
+./ag project create "My New Project" --license Apache-2.0
 ```
 
 ### UV Package Manager
 
-The `scripts/uv_manager.py` script helps with installing and managing uv:
+The uv commands help with installing and managing uv:
 
 ```bash
 # Install uv
-./scripts/uv_manager.py install
+./ag uv install
 
 # Update uv
-./scripts/uv_manager.py update
+./ag uv update
 
 # List available Python versions
-./scripts/uv_manager.py list-python
+./ag uv list-python
 
 # Install a specific Python version
-./scripts/uv_manager.py install-python 3.11
+./ag uv install-python 3.11
 
 # Create a virtual environment
-./scripts/uv_manager.py create-venv /path/to/venv --python 3.11
+./ag uv create-venv /path/to/venv --python 3.11
 
 # Create with custom timeout and retries
-./scripts/uv_manager.py create-venv /path/to/venv --python 3.11 --timeout 600 --retries 5
+./ag uv create-venv /path/to/venv --python 3.11 --timeout 600 --retries 5
 
 # Install dependencies in a virtual environment
-./scripts/uv_manager.py install-deps /path/to/venv --requirements requirements.txt
-./scripts/uv_manager.py install-deps /path/to/venv --packages numpy pandas matplotlib
+./ag uv install-deps /path/to/venv --requirements requirements.txt
+./ag uv install-deps /path/to/venv --packages numpy pandas matplotlib
 
 # Install a project in editable mode
-./scripts/uv_manager.py install-editable /path/to/venv /path/to/project
+./ag uv install-editable /path/to/venv /path/to/project
 
 # Show information about uv
-./scripts/uv_manager.py info
+./ag uv info
 
 # Clean the uv cache
-./scripts/uv_manager.py clean-cache
-./scripts/uv_manager.py clean-cache --older-than 30
+./ag uv clean-cache
+./ag uv clean-cache --older-than 30
 ```
 
 ### Cleanup and Maintenance
 
-The `scripts/cleanup_manager.py` script helps with cleaning up temporary files and maintaining the directory structure:
+The cleanup commands help with cleaning up temporary files and maintaining the directory structure:
 
 ```bash
 # Clean up temporary files older than 7 days
-./scripts/cleanup_manager.py cleanup-tmp
+./ag cleanup tmp
 
 # Check for orphaned virtual environments
-./scripts/cleanup_manager.py check-orphaned-venvs
+./ag cleanup check-orphaned-venvs
 
 # Check the directory structure
-./scripts/cleanup_manager.py check-structure
+./ag cleanup check-structure
 
 # Analyze disk usage
-./scripts/cleanup_manager.py disk-usage
+./ag cleanup disk-usage
 ```
 
 ## Key Features
@@ -311,7 +311,7 @@ To work with this framework:
 
    If you encounter issues with the automated setup script (particularly network-related issues when installing dependencies), you can follow the [Manual Setup Guide](MANUAL_SETUP.md) to set up the environment manually.
 
-3. Run `./scripts/check_environment.py` to verify the environment is set up correctly
+3. Run `./ag env check` to verify the environment is set up correctly
 4. Read the [Human Guide](HUMAN_GUIDE.md) for detailed instructions on how to use the framework
 5. Use the utility scripts to manage your projects and environments
 6. Follow the directory structure and guidelines when creating new projects
