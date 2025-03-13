@@ -187,6 +187,10 @@ def check_directory_structure():
         save_registry(registry)
         print("Registry file created successfully.")
 
+def disk_usage(args=None):
+    """Analyze disk usage of the Agentic directories, called by the ag script."""
+    return analyze_disk_usage()
+
 def analyze_disk_usage():
     """Analyze disk usage of the Agentic directories."""
     directories = [

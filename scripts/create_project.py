@@ -324,7 +324,7 @@ def register_virtual_environment(venv_path, project_name, description):
         print(f"Error registering virtual environment: {e}")
         return False
 
-def create_project(project_name, description, license_type="MIT"):
+def create_new_project(project_name, description, license_type="MIT"):
     """Create a new project with the standard structure."""
     # Convert project name to kebab-case for directory name
     dir_name = project_name.lower().replace(" ", "-")
@@ -378,10 +378,20 @@ def main():
     
     args = parser.parse_args()
     
-    create_project(args.project_name, args.description, args.license)
+    create_new_project(args.project_name, args.description, args.license)
 
 def create_project(args):
     """Create a new project, called by the ag script."""
+    # Check for help flag
+    if len(args) > 0 and (args[0] == "--help" or args[0] == "-h"):
+        print("Usage: ./ag project create <project_name> [options]")
+        print("\nOptions:")
+        print("  --description, -d <description>  Project description")
+        print("  --license, -l <license>          License type (default: MIT)")
+        print("\nExample:")
+        print("  ./ag project create \"My Project\" --description \"A cool project\" --license Apache-2.0")
+        return 0
+        
     if len(args) < 1:
         print("Error: Missing required arguments")
         print("Usage: ./ag project create <project_name> [options]")
@@ -403,7 +413,7 @@ def create_project(args):
         else:
             i += 1
     
-    return create_project(project_name, description, license_type)
+    return create_new_project(project_name, description, license_type)
 
 def list_projects(args):
     """List existing projects, called by the ag script."""

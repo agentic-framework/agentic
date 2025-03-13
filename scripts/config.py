@@ -319,6 +319,36 @@ def get_all() -> Dict[str, Any]:
     """Get the entire configuration."""
     return config.get_all()
 
+def list_config(args):
+    """
+    List all configuration values, called by the ag script.
+    
+    Args:
+        args: Command-line arguments
+    
+    Returns:
+        int: Exit code
+    """
+    if args and "--section" in args:
+        section_index = args.index("--section")
+        if section_index + 1 < len(args):
+            section = args[section_index + 1]
+            section_data = get(section)
+            if section_data is not None:
+                print(f"{section}:")
+                for key, value in section_data.items():
+                    print(f"  {key}: {value}")
+            else:
+                print(f"Section '{section}' not found in configuration")
+        else:
+            print("Error: No section specified after --section")
+            return 1
+    else:
+        config_dict = get_all()
+        print(json.dumps(config_dict, indent=2))
+    
+    return 0
+
 def main():
     """Main function to handle command line arguments."""
     import argparse

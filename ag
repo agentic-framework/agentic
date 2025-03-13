@@ -289,6 +289,8 @@ class AgenticCLI:
         # Set up module paths
         self.agentic_root = os.path.expanduser("~/Agentic")
         self.agentic_dir = os.path.join(self.agentic_root, "agentic")
+        self.scripts_dir = os.path.join(self.agentic_dir, "scripts")
+        sys.path.insert(0, self.scripts_dir)
         sys.path.insert(0, self.agentic_dir)
     
     def run(self):
@@ -352,7 +354,7 @@ class AgenticCLI:
         
         try:
             # Try to import the module
-            module_path = os.path.join(self.agentic_dir, f"{module_name}.py")
+            module_path = os.path.join(self.scripts_dir, f"{module_name}.py")
             if not os.path.exists(module_path):
                 print(f"Error: Module not found: {module_path}")
                 return 1

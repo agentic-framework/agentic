@@ -247,7 +247,7 @@ def check_utility_scripts():
     all_exist = True
     
     for script in UTILITY_SCRIPTS:
-        script_path = os.path.join(AGENTIC_DIR, "agentic", script)
+        script_path = os.path.join(AGENTIC_DIR, "agentic", "scripts", script)
         exists = os.path.exists(script_path)
         executable = exists and os.access(script_path, os.X_OK)
         
@@ -421,7 +421,7 @@ def check_disk_space():
         logger.error(f"Error checking disk space: {e}")
         return False
 
-def fix_environment():
+def apply_environment_fixes():
     """Attempt to fix common environment issues."""
     fixes_applied = []
     
@@ -437,7 +437,7 @@ def fix_environment():
     
     # Make utility scripts executable
     for script in UTILITY_SCRIPTS:
-        script_path = os.path.join(AGENTIC_DIR, "agentic", script)
+        script_path = os.path.join(AGENTIC_DIR, "agentic", "scripts", script)
         if os.path.exists(script_path) and not os.access(script_path, os.X_OK):
             try:
                 os.chmod(script_path, 0o755)
@@ -514,7 +514,7 @@ def main():
         logger.info("Running in fix mode")
         
         # Apply fixes
-        fixes = fix_environment()
+        fixes = apply_environment_fixes()
         if fixes:
             print("\n\033[1mFixes Applied:\033[0m")
             for fix in fixes:
@@ -582,6 +582,7 @@ def main():
 
 def check_environment(args):
     """Function to check the environment setup, called by the ag script."""
+    # args parameter is not used but required by the ag script interface
     return main()
 
 def fix_environment(args):

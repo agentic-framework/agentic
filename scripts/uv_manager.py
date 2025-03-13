@@ -199,7 +199,7 @@ def update_uv():
     
     return True
 
-def list_python_versions():
+def list_python_versions(args=None):
     """List Python versions available through uv."""
     if not is_uv_installed():
         print("uv is not installed. Please install it first.")

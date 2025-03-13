@@ -30,7 +30,7 @@ logger = logging.getLogger("rule_loader")
 os.makedirs(os.path.expanduser("~/Agentic/logs"), exist_ok=True)
 
 # Path to the rules file
-RULES_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "rules.json")
+RULES_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "rules.json")
 
 class RuleLoader:
     """Class for loading and verifying Agentic framework rules."""
@@ -370,6 +370,28 @@ class RuleLoader:
             logger.error(f"Error saving verification results: {e}")
             print(f"Error saving verification results: {e}")
             return None
+
+def list_categories(args):
+    """List rule categories or utility scripts, called by the ag script."""
+    rule_loader = RuleLoader()
+    
+    # Check if we should list utility scripts instead of rule categories
+    if args and "--utility-scripts" in args:
+        scripts = rule_loader.get_all_utility_scripts()
+        print("Available utility scripts:")
+        for script in scripts:
+            info = rule_loader.get_utility_script_info(script)
+            if info and "purpose" in info:
+                print(f"  - {script}: {info['purpose']}")
+            else:
+                print(f"  - {script}: No purpose information available")
+    else:
+        categories = rule_loader.get_all_categories()
+        print("Available rule categories:")
+        for category in categories:
+            print(f"  - {category}")
+    
+    return 0
 
 def main():
     """Main function to handle command line arguments."""

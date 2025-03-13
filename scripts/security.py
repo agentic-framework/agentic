@@ -353,6 +353,33 @@ def is_path_allowed(path: str) -> bool:
     """
     return security.is_path_allowed(path)
 
+def check_path(args):
+    """
+    Check if a path is allowed, called by the ag script.
+    
+    Args:
+        args: Command-line arguments
+    
+    Returns:
+        int: Exit code
+    """
+    if not args:
+        print("Error: No path specified")
+        print("Usage: ./ag security check-path <path>")
+        return 1
+    
+    path = args[0]
+    
+    try:
+        if is_path_allowed(path):
+            print(f"Path '{path}' is allowed")
+        else:
+            print(f"Path '{path}' is not allowed")
+        return 0
+    except Exception as e:
+        print(f"Error checking path: {e}")
+        return 1
+
 def validate_path(path: str, operation: str = "access") -> bool:
     """
     Validate a path for a specific operation.
