@@ -35,7 +35,7 @@ To set up the Agentic framework:
 2. Run `./setup_agentic.sh` to fully set up the environment
    - This will install dependencies, create necessary directories, and initialize the registry
    - If you encounter issues with the automated setup (particularly network-related issues), follow the [Manual Setup Guide](MANUAL_SETUP.md) instead
-3. Run `./check_environment.py` to verify the environment is set up correctly
+3. Run `./ag env check` to verify the environment is set up correctly
 4. Review this guide to understand how to use the framework
 
 ## How to Instruct AI Agents
@@ -104,7 +104,7 @@ Read the Agentic framework located at $HOME/Agentic to load your rules and tools
 
 7. **Verify Understanding**: Use the rule verification system to ensure the agent has correctly understood the framework rules:
    ```
-   ./rule_loader.py verify
+   ./ag rule verify
    ```
    This will quiz the agent on its understanding of key rules and provide a score.
 
@@ -143,8 +143,8 @@ The framework includes tools for system maintenance:
 
 If you encounter issues with the Agentic framework:
 
-1. Run `./check_environment.py` to check for common issues
-2. Run `./check_environment.py --fix` to automatically fix common issues
+1. Run `./ag env check` to check for common issues
+2. Run `./ag env fix` to automatically fix common issues
 3. Check the logs in `$HOME/Agentic/logs/` for more information
 4. Ask an AI agent to help diagnose the issue:
    ```

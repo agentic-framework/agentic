@@ -6,14 +6,14 @@ This document is specifically designed for AI agents (like Claude, GPT, etc.) op
 
 When you are instructed to "Read the Agentic framework located at $HOME/Agentic to load your rules and tools," this is the primary document you should reference to understand how to operate correctly on this system.
 
-> **Important**: All rules in this document are also available in a structured, machine-readable format in the `rules.json` file. You can use the `rule_loader.py` script to programmatically access and verify your understanding of these rules:
+> **Important**: All rules in this document are also available in a structured, machine-readable format in the `rules.json` file. You can use the `ag rule` command to programmatically access and verify your understanding of these rules:
 > 
 > ```bash
 > # Verify your understanding of the rules
-> ./rule_loader.py verify
+> ./ag rule verify
 > 
 > # Query specific rules
-> ./rule_loader.py query python_environment
+> ./ag rule query python_environment
 > ```
 
 ## Table of Contents
@@ -72,7 +72,7 @@ When you are instructed to "Read the Agentic framework located at $HOME/Agentic 
 - Lock files (`uv.lock`) should be committed to version control for applications but not for libraries.
 - When installing a project in editable mode, use:
   ```bash
-  uv_manager.py install-editable /path/to/venv /path/to/project
+  ./ag uv install-editable /path/to/venv /path/to/project
   ```
 
 ### Environment Cleanup
@@ -80,8 +80,8 @@ When you are instructed to "Read the Agentic framework located at $HOME/Agentic 
 - Regularly clean unused virtual environments.
 - Maintain a list of active virtual environments in `$HOME/Agentic/venv_registry.json`.
 - Update the registry when creating or removing virtual environments.
-- Periodically run `venv_manager.py cleanup` to remove invalid or non-existent environments from the registry.
-- Use `venv_manager.py repair` to scan for and register untracked environments.
+- Periodically run `./ag venv cleanup` to remove invalid or non-existent environments from the registry.
+- Use `./ag venv repair` to scan for and register untracked environments.
 
 ## Directory Structure
 
@@ -129,7 +129,7 @@ When you are instructed to "Read the Agentic framework located at $HOME/Agentic 
 - All new projects should be initialized with a README.md file describing the project.
 - Include a LICENSE file with appropriate licensing information.
 - Set up proper .gitignore file for the project type.
-- Use the `create_project.py` script to create new projects with the standard structure.
+- Use the `./ag project create` command to create new projects with the standard structure.
 
 ### Documentation
 
@@ -256,7 +256,7 @@ When you are instructed to "Read the Agentic framework located at $HOME/Agentic 
 - Use the designated cache directory (`$HOME/Agentic/cache/`) for all cached data.
 - Organize cache files in subdirectories by purpose or application.
 - Include cache invalidation mechanisms to prevent stale data.
-- Regularly clean up old cache files using `uv_manager.py clean-cache`.
+- Regularly clean up old cache files using `./ag uv clean-cache`.
 - Document cache structure and purpose.
 
 ### Performance Optimization
@@ -274,7 +274,7 @@ When you are instructed to "Read the Agentic framework located at $HOME/Agentic 
 - Regularly back up critical files to the `$HOME/Agentic/backups/` directory.
 - Use timestamped filenames for backups to maintain version history.
 - Implement automatic backup before critical operations.
-- Use `venv_manager.py backup` to create registry backups.
+- Use `./ag venv backup` to create registry backups.
 - Limit the number of backup files to prevent excessive disk usage.
 
 ### Recovery Procedures
@@ -283,7 +283,7 @@ When you are instructed to "Read the Agentic framework located at $HOME/Agentic 
 - Implement automatic recovery mechanisms where possible.
 - Verify the integrity of restored files after recovery.
 - Test recovery procedures periodically.
-- Use `check_environment.py --fix` to automatically repair common issues.
+- Use `./ag env fix` to automatically repair common issues.
 
 ---
 

@@ -2,14 +2,14 @@
 
 This document provides a concise reference of essential information for AI agents operating within the Agentic framework. For complete details, refer to [Agent Operation Rules](AGENT_RULES.md).
 
-> **Important**: All rules are available in a structured, machine-readable format in the `rules.json` file. You can use the `rule_loader.py` script to programmatically access and verify your understanding of these rules:
+> **Important**: All rules are available in a structured, machine-readable format in the `rules.json` file. You can use the `ag rule` command to programmatically access and verify your understanding of these rules:
 > 
 > ```bash
 > # Verify your understanding of the rules
-> ./rule_loader.py verify
+> ./ag rule verify
 > 
 > # Query specific rules
-> ./rule_loader.py query python_environment
+> ./ag rule query python_environment
 > ```
 
 ## Key Directories
@@ -31,39 +31,42 @@ $HOME/Agentic/
 
 ```bash
 # Check environment setup
-./check_environment.py
-./check_environment.py --fix  # Auto-fix issues
+./ag env check
+./ag env fix  # Auto-fix issues
 
 # UV Package Manager
-./uv_manager.py install       # Install uv
-./uv_manager.py install-python 3.11  # Install Python
-./uv_manager.py create-venv /path/to/project/.venv --python 3.11  # Create venv
+./ag uv install       # Install uv
+./ag uv install-python 3.11  # Install Python
+./ag venv create /path/to/project/.venv --python 3.11  # Create venv
 ```
 
 ### Virtual Environment Management
 
 ```bash
 # List virtual environments
-./venv_manager.py list
+./ag venv list
 
-# Register a virtual environment
-./venv_manager.py add /path/to/venv project-name
+# Create a virtual environment
+./ag venv create /path/to/venv project-name
 
 # Check virtual environment status
-./venv_manager.py check --project-name project-name
+./ag venv check --project-name project-name
 
 # Clean up registry
-./venv_manager.py cleanup
+./ag venv cleanup
 ```
 
 ### Project Management
 
 ```bash
 # Create a new project
-./create_project.py "Project Name" --description "Description"
+./ag project create "Project Name" --description "Description"
+
+# List existing projects
+./ag project list
 
 # Clean up temporary files
-./cleanup_manager.py cleanup-tmp
+./ag cleanup tmp
 ```
 
 ## Standard Project Structure
@@ -123,36 +126,33 @@ project-name/
 
 ```bash
 # 1. Create the project structure
-./create_project.py "My Project" --description "Description"
+./ag project create "My Project" --description "Description"
 
 # 2. Create a virtual environment
-./uv_manager.py create-venv $HOME/Agentic/projects/my-project/.venv --python 3.11
+./ag venv create $HOME/Agentic/projects/my-project/.venv --python 3.11
 
-# 3. Register the virtual environment
-./venv_manager.py add $HOME/Agentic/projects/my-project/.venv my-project
-
-# 4. Install dependencies
-./uv_manager.py install-deps $HOME/Agentic/projects/my-project/.venv --packages numpy pandas
+# 3. Install dependencies
+./ag uv install-deps $HOME/Agentic/projects/my-project/.venv --packages numpy pandas
 ```
 
 ### Working with Existing Projects
 
 ```bash
 # 1. Check if the project has a registered virtual environment
-./venv_manager.py check --project-name project-name
+./ag venv check --project-name project-name
 
 # 2. Update package list
-./venv_manager.py update-packages --project-name project-name
+./ag venv update-packages --project-name project-name
 
 # 3. Install new dependencies
-./uv_manager.py install-deps /path/to/venv --packages new-package
+./ag uv install-deps /path/to/venv --packages new-package
 ```
 
 ## Error Recovery
 
 If you encounter issues:
 
-1. Check environment: `./check_environment.py`
-2. Fix common issues: `./check_environment.py --fix`
-3. Repair registry: `./venv_manager.py repair`
-4. Clean up invalid environments: `./venv_manager.py cleanup`
+1. Check environment: `./ag env check`
+2. Fix common issues: `./ag env fix`
+3. Repair registry: `./ag venv repair`
+4. Clean up invalid environments: `./ag venv cleanup`

@@ -54,11 +54,11 @@ chmod +x $HOME/Agentic/agentic/*.py $HOME/Agentic/agentic/*.sh
 
 ### 4. Verify the Setup
 
-Run the `check_environment.py` script to verify the setup:
+Run the environment check command to verify the setup:
 
 ```bash
 cd $HOME/Agentic/agentic
-./check_environment.py
+./ag env check
 ```
 
 This will show you what's working and what still needs to be addressed.
@@ -69,7 +69,7 @@ If you want to install the UV package manager (required for Python environment m
 
 ```bash
 cd $HOME/Agentic/agentic
-./uv_manager.py install
+./ag uv install
 ```
 
 If this fails due to network issues, you can install UV manually following the instructions at [https://github.com/astral-sh/uv](https://github.com/astral-sh/uv).
@@ -80,7 +80,7 @@ After installing UV, you can install Python:
 
 ```bash
 cd $HOME/Agentic/agentic
-./uv_manager.py install-python 3.11  # or your preferred version
+./ag uv install-python 3.11  # or your preferred version
 ```
 
 ## Optional: Creating Virtual Environments
@@ -89,8 +89,7 @@ To create a virtual environment for a project:
 
 ```bash
 cd $HOME/Agentic/agentic
-./uv_manager.py create-venv $HOME/Agentic/projects/your-project/.venv
-./venv_manager.py add $HOME/Agentic/projects/your-project/.venv your-project
+./ag venv create $HOME/Agentic/projects/your-project/.venv --python 3.11
 ```
 
 ## Troubleshooting

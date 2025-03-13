@@ -13,11 +13,12 @@ $HOME/
     │   ├── AGENT_QUICK_REFERENCE.md  # Quick reference for AI agents
     │   ├── HUMAN_GUIDE.md    # Guide for human users
     │   ├── DIRECTORY_STRUCTURE.md  # This file
-    │   ├── check_environment.py  # Environment verification script
-    │   ├── venv_manager.py   # Virtual environment management script
-    │   ├── create_project.py # Project creation script
-    │   ├── uv_manager.py     # UV package manager script
-    │   └── cleanup_manager.py  # Cleanup and maintenance script
+    │   ├── ag                # Main command-line interface
+    │   ├── check_environment.py  # Environment verification script (legacy)
+    │   ├── venv_manager.py   # Virtual environment management script (legacy)
+    │   ├── create_project.py # Project creation script (legacy)
+    │   ├── uv_manager.py     # UV package manager script (legacy)
+    │   └── cleanup_manager.py  # Cleanup and maintenance script (legacy)
     │
     ├── projects/             # All agent-created projects (not under version control)
     ├── shared/               # Shared resources between projects (not under version control)
@@ -68,11 +69,11 @@ Projects should always be created in the projects directory, not in the git-mana
 
 ```bash
 # Correct
-$HOME/Agentic/agentic/create_project.py "My Project"  # This will create the project in $HOME/Agentic/projects/my-project
+$HOME/Agentic/agentic/ag project create "My Project"  # This will create the project in $HOME/Agentic/projects/my-project
 
 # Incorrect
 cd $HOME/Agentic/agentic
-./create_project.py "My Project"  # Don't create projects inside the git repository
+./ag project create "My Project"  # Don't create projects inside the git repository
 ```
 
 ### When Referencing Paths in Scripts

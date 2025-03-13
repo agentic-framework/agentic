@@ -44,11 +44,12 @@ $HOME/
     │   ├── HUMAN_GUIDE.md    # Guide for human users
     │   ├── DIRECTORY_STRUCTURE.md  # Directory structure documentation
     │   ├── CONSOLIDATED_DOCS.md  # This file
-    │   ├── check_environment.py  # Environment verification script
-    │   ├── venv_manager.py   # Virtual environment management script
-    │   ├── create_project.py # Project creation script
-    │   ├── uv_manager.py     # UV package manager script
-    │   └── cleanup_manager.py  # Cleanup and maintenance script
+    │   ├── ag                # Main command-line interface
+    │   ├── check_environment.py  # Environment verification script (legacy)
+    │   ├── venv_manager.py   # Virtual environment management script (legacy)
+    │   ├── create_project.py # Project creation script (legacy)
+    │   ├── uv_manager.py     # UV package manager script (legacy)
+    │   └── cleanup_manager.py  # Cleanup and maintenance script (legacy)
     │
     ├── projects/             # All agent-created projects (not under version control)
     ├── shared/               # Shared resources between projects (not under version control)
@@ -95,11 +96,11 @@ When creating projects, they should always be created in the projects directory,
 
 ```bash
 # Correct
-$HOME/Agentic/agentic/create_project.py "My Project"  # This will create the project in $HOME/Agentic/projects/my-project
+$HOME/Agentic/agentic/ag project create "My Project"  # This will create the project in $HOME/Agentic/projects/my-project
 
 # Incorrect
 cd $HOME/Agentic/agentic
-./create_project.py "My Project"  # Don't create projects inside the git repository
+./ag project create "My Project"  # Don't create projects inside the git repository
 ```
 
 When referencing paths in scripts, use the correct paths:
@@ -158,7 +159,7 @@ PROJECTS_DIR = os.path.join(AGENTIC_DIR, "projects")  # This would incorrectly p
 - Lock files (`uv.lock`) should be committed to version control for applications but not for libraries.
 - When installing a project in editable mode, use:
   ```bash
-  uv_manager.py install-editable /path/to/venv /path/to/project
+  ./ag uv install-editable /path/to/venv /path/to/project
   ```
 
 ### Environment Cleanup
@@ -166,8 +167,8 @@ PROJECTS_DIR = os.path.join(AGENTIC_DIR, "projects")  # This would incorrectly p
 - Regularly clean unused virtual environments.
 - Maintain a list of active virtual environments in `$HOME/Agentic/venv_registry.json`.
 - Update the registry when creating or removing virtual environments.
-- Periodically run `venv_manager.py cleanup` to remove invalid or non-existent environments from the registry.
-- Use `venv_manager.py repair` to scan for and register untracked environments.
+- Periodically run `./ag venv cleanup` to remove invalid or non-existent environments from the registry.
+- Use `./ag venv repair` to scan for and register untracked environments.
 
 ## Project Management
 
@@ -196,7 +197,7 @@ PROJECTS_DIR = os.path.join(AGENTIC_DIR, "projects")  # This would incorrectly p
 - All new projects should be initialized with a README.md file describing the project.
 - Include a LICENSE file with appropriate licensing information.
 - Set up proper .gitignore file for the project type.
-- Use the `create_project.py` script to create new projects with the standard structure.
+- Use the `./ag project create` command to create new projects with the standard structure.
 
 ### Documentation
 
@@ -525,7 +526,7 @@ The `cleanup_manager.py` script helps with cleaning up temporary files and maint
 - Use the designated cache directory (`$HOME/Agentic/cache/`) for all cached data.
 - Organize cache files in subdirectories by purpose or application.
 - Include cache invalidation mechanisms to prevent stale data.
-- Regularly clean up old cache files using `uv_manager.py clean-cache`.
+- Regularly clean up old cache files using `./ag uv clean-cache`.
 - Document cache structure and purpose.
 
 ### Performance Optimization
@@ -543,7 +544,7 @@ The `cleanup_manager.py` script helps with cleaning up temporary files and maint
 - Regularly back up critical files to the `$HOME/Agentic/backups/` directory.
 - Use timestamped filenames for backups to maintain version history.
 - Implement automatic backup before critical operations.
-- Use `venv_manager.py backup` to create registry backups.
+- Use `./ag venv backup` to create registry backups.
 - Limit the number of backup files to prevent excessive disk usage.
 
 ### Recovery Procedures
@@ -552,7 +553,7 @@ The `cleanup_manager.py` script helps with cleaning up temporary files and maint
 - Implement automatic recovery mechanisms where possible.
 - Verify the integrity of restored files after recovery.
 - Test recovery procedures periodically.
-- Use `check_environment.py --fix` to automatically repair common issues.
+- Use `./ag env fix` to automatically repair common issues.
 
 ## Getting Started
 
@@ -583,9 +584,9 @@ To work with this framework:
 
    If you encounter issues with the automated setup script (particularly network-related issues when installing dependencies), you can follow the [Manual Setup Guide](MANUAL_SETUP.md) to set up the environment manually.
 
-3. Run `./check_environment.py` to verify the environment is set up correctly
+3. Run `./ag env check` to verify the environment is set up correctly
 4. Read the [Human Guide](HUMAN_GUIDE.md) for detailed instructions on how to use the framework
-5. Use the utility scripts to manage your projects and environments
+5. Use the `ag` command to manage your projects and environments
 6. Follow the directory structure and guidelines when creating new projects
 
 For AI agents: Review the [Agent Operation Rules](AGENT_RULES.md) or the [Quick Reference Guide](AGENT_QUICK_REFERENCE.md) to understand how to operate within this framework.
