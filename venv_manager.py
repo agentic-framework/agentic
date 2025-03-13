@@ -666,6 +666,7 @@ def add_environment(args):
     python_version = None
     description = None
     verify = True
+    force = False
     
     i = 2
     while i < len(args):
@@ -678,10 +679,71 @@ def add_environment(args):
         elif args[i] == "--no-verify":
             verify = False
             i += 1
+        elif args[i] == "--force":
+            force = True
+            verify = False
+            i += 1
         else:
             i += 1
     
-    return add_venv(venv_path, project_name, python_version, description, verify)
+    # If force is true, we'll add the environment without verification or prompts
+    if force:
+        registry = load_registry()
+        
+        # Convert to absolute path
+        venv_path = os.path.abspath(os.path.expanduser(venv_path))
+        
+        # Check if venv exists
+        if not os.path.isdir(venv_path):
+            print(f"Error: Virtual environment directory not found: {venv_path}")
+            logger.error(f"Virtual environment directory not found: {venv_path}")
+            return False
+        
+        # Check if venv is already registered
+        for venv in registry["virtual_environments"]:
+            if venv["path"] == venv_path:
+                print(f"Virtual environment already registered: {venv_path}")
+                logger.info(f"Virtual environment already registered: {venv_path}")
+                
+                # Update the entry
+                venv["project_name"] = project_name
+                if python_version:
+                    venv["python_version"] = python_version
+                if description:
+                    venv["description"] = description
+                venv["last_updated"] = datetime.now().isoformat()
+                save_registry(registry)
+                print(f"Updated virtual environment: {venv_path}")
+                logger.info(f"Updated virtual environment: {venv_path}")
+                return True
+        
+        # Get Python version if not provided
+        if not python_version:
+            python_version = get_python_version(venv_path)
+        
+        # Add venv to registry
+        venv_info = {
+            "path": venv_path,
+            "project_name": project_name,
+            "python_version": python_version,
+            "description": description or f"Virtual environment for {project_name}",
+            "created_at": datetime.now().isoformat(),
+            "last_used": datetime.now().isoformat(),
+            "last_updated": datetime.now().isoformat()
+        }
+        
+        # Get installed packages
+        packages = get_installed_packages(venv_path)
+        if packages:
+            venv_info["packages"] = packages
+        
+        registry["virtual_environments"].append(venv_info)
+        save_registry(registry)
+        print(f"Added virtual environment: {venv_path}")
+        logger.info(f"Added virtual environment: {venv_path}")
+        return True
+    else:
+        return add_venv(venv_path, project_name, python_version, description, verify)
 
 def create_environment(args):
     """Create a new virtual environment, called by the ag script."""
