@@ -652,6 +652,37 @@ def list_environments(args):
     show_packages = "--packages" in args or "-p" in args
     return list_venvs(verbose, show_packages)
 
+def add_environment(args):
+    """Add an existing virtual environment to the registry, called by the ag script."""
+    if len(args) < 2:
+        print("Error: Missing required arguments")
+        print("Usage: ./ag venv add <venv_path> <project_name> [options]")
+        return 1
+    
+    venv_path = args[0]
+    project_name = args[1]
+    
+    # Parse optional arguments
+    python_version = None
+    description = None
+    verify = True
+    
+    i = 2
+    while i < len(args):
+        if args[i] == "--python-version" and i + 1 < len(args):
+            python_version = args[i + 1]
+            i += 2
+        elif args[i] == "--description" and i + 1 < len(args):
+            description = args[i + 1]
+            i += 2
+        elif args[i] == "--no-verify":
+            verify = False
+            i += 1
+        else:
+            i += 1
+    
+    return add_venv(venv_path, project_name, python_version, description, verify)
+
 def create_environment(args):
     """Create a new virtual environment, called by the ag script."""
     if len(args) < 2:

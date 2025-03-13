@@ -53,6 +53,11 @@ COMMAND_STRUCTURE = {
                 "module": "venv_manager",
                 "function": "create_environment"
             },
+            "add": {
+                "description": "Add an existing virtual environment to the registry",
+                "module": "venv_manager",
+                "function": "add_environment"
+            },
             "remove": {
                 "description": "Remove a virtual environment",
                 "module": "venv_manager",
