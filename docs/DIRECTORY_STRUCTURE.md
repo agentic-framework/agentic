@@ -16,18 +16,26 @@ $HOME/
     │   │   ├── DIRECTORY_STRUCTURE.md  # This file
     │   │   ├── LESSON_LEARNED.md  # Lessons learned during development
     │   │   └── CONSOLIDATED_DOCS.md  # Consolidated documentation
-    │   ├── scripts/          # Utility scripts
-    │   │   ├── check_environment.py  # Environment verification script
-    │   │   ├── venv_manager.py  # Virtual environment management script
-    │   │   ├── create_project.py  # Project creation script
-    │   │   ├── uv_manager.py  # UV package manager script
-    │   │   └── cleanup_manager.py  # Cleanup and maintenance script
-    │   ├── ag                # Main command-line interface
+    │   ├── scripts/          # Legacy utility scripts (moved to agentic-core)
+    │   ├── ag                # Main command-line interface (symlink to agentic-core)
     │   ├── LICENSE           # License file
     │   ├── rules.json        # Structured rules in machine-readable format
     │   └── agentic_info.json # Framework configuration
     │
     ├── projects/             # All agent-created projects (not under version control)
+    │   ├── agentic-core/     # Command line tool framework
+    │   │   ├── src/          # Source code
+    │   │   │   └── agentic_core/  # Main package
+    │   │   │       ├── cli.py     # Main CLI implementation
+    │   │   │       ├── commands/  # Command implementations
+    │   │   │       │   ├── check_environment.py  # Environment verification
+    │   │   │       │   ├── venv_manager.py      # Virtual environment management
+    │   │   │       │   ├── create_project.py    # Project creation
+    │   │   │       │   ├── uv_manager.py        # UV package manager
+    │   │   │       │   └── cleanup_manager.py   # Cleanup and maintenance
+    │   │   │       └── bin/       # Executable scripts
+    │   │   ├── ag            # Main entry point script
+    │   │   └── README.md     # Documentation
     ├── shared/               # Shared resources between projects (not under version control)
     ├── tmp/                  # Temporary files (not under version control)
     ├── logs/                 # Log files (not under version control)

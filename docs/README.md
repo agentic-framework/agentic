@@ -23,11 +23,19 @@ For a detailed explanation of the directory structure, including the important d
 
 ```
 $HOME/Agentic/
-├── agentic/              # Git-managed repository (rules and core tools)
+├── agentic/              # Git-managed repository (rules and documentation)
 │   ├── docs/             # Documentation files
-│   ├── scripts/          # Utility scripts
-│   ├── ag                # Main command-line interface
+│   ├── scripts/          # Legacy utility scripts
+│   ├── ag                # Main command-line interface (symlink to agentic-core)
 │   └── LICENSE           # License file
+├── projects/agentic-core/ # Command line tool framework
+│   ├── src/              # Source code
+│   │   └── agentic_core/ # Main package
+│   │       ├── cli.py    # Main CLI implementation
+│   │       ├── commands/ # Command implementations
+│   │       └── bin/      # Executable scripts
+│   ├── ag                # Main entry point script
+│   └── README.md         # Documentation
 ├── projects/             # All agent-created projects
 ├── shared/               # Shared resources
 ├── tmp/                  # Temporary files
