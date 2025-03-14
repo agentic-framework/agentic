@@ -17,6 +17,16 @@ The documentation is organized into six main sections:
 - **Directory Structure**: The [Directory Structure Guide](DIRECTORY_STRUCTURE.md) provides a detailed explanation of the framework's directory structure, specifically addressing the distinction between the root Agentic folder and the git-managed repository folder.
 - **Lessons Learned**: The [Lessons Learned](LESSON_LEARNED.md) document records important lessons learned during the development and maintenance of the framework, particularly focusing on git operations and common pitfalls.
 
+## Installation
+
+To use the Agentic framework, you need to install the command-line tool:
+
+```bash
+pip install agentic-core
+```
+
+This will make the `ag` command available in your environment.
+
 ## Directory Structure
 
 For a detailed explanation of the directory structure, including the important distinction between the root Agentic folder and the git-managed repository folder, see the [Directory Structure Guide](DIRECTORY_STRUCTURE.md).
@@ -26,7 +36,6 @@ $HOME/Agentic/
 ├── agentic/              # Git-managed repository (rules and documentation)
 │   ├── docs/             # Documentation files
 │   ├── scripts/          # Legacy utility scripts
-│   ├── ag                # Main command-line interface (symlink to agentic-core)
 │   └── LICENSE           # License file
 ├── projects/agentic-core/ # Command line tool framework
 │   ├── src/              # Source code
@@ -34,7 +43,6 @@ $HOME/Agentic/
 │   │       ├── cli.py    # Main CLI implementation
 │   │       ├── commands/ # Command implementations
 │   │       └── bin/      # Executable scripts
-│   ├── ag                # Main entry point script
 │   └── README.md         # Documentation
 ├── projects/             # All agent-created projects
 ├── shared/               # Shared resources
@@ -54,19 +62,19 @@ The security commands provide technical enforcement mechanisms to ensure AI agen
 
 ```bash
 # Check if a path is allowed
-./ag security check-path /path/to/check
+ag security check-path /path/to/check
 
 # Validate a command for execution
-./ag security validate-command "command to validate"
+ag security validate-command "command to validate"
 
 # Scan a file for potential security violations
-./ag security scan-file /path/to/file
+ag security scan-file /path/to/file
 
 # Calculate the SHA-256 hash of a file
-./ag security hash-file /path/to/file
+ag security hash-file /path/to/file
 
 # Verify the integrity of a file
-./ag security verify-integrity /path/to/file expected-hash
+ag security verify-integrity /path/to/file expected-hash
 ```
 
 This script enforces security boundaries, validates operations, and logs security events. It helps prevent AI agents from accessing or modifying files outside their designated areas.
@@ -77,22 +85,22 @@ The config commands provide a centralized configuration system for the Agentic f
 
 ```bash
 # Get a configuration value
-./ag config get paths.agentic_root
+ag config get paths.agentic_root
 
 # Set a configuration value
-./ag config set python.default_python_version 3.12
+ag config set python.default_python_version 3.12
 
 # List all configuration values
-./ag config list
+ag config list
 
 # List a specific section
-./ag config list --section paths
+ag config list --section paths
 
 # Check if a path is allowed
-./ag config check /path/to/check
+ag config check /path/to/check
 
 # Reset configuration to defaults
-./ag config reset
+ag config reset
 ```
 
 This script provides a standardized API for accessing configuration values and handles path variability across different installations. All other scripts in the framework use this configuration system to ensure consistency.
@@ -103,24 +111,24 @@ The rule commands provide utilities for loading, verifying, and querying the Age
 
 ```bash
 # Verify an AI agent's understanding of the rules
-./ag rule verify
+ag rule verify
 
 # Run verification in non-interactive mode
-./ag rule verify --non-interactive
+ag rule verify --non-interactive
 
 # Save verification results to a file
-./ag rule verify --output /path/to/results.json
+ag rule verify --output /path/to/results.json
 
 # Query specific rules
-./ag rule query python_environment
-./ag rule query python_environment --subcategory virtual_environments
-./ag rule query python_environment --subcategory virtual_environments --key location
+ag rule query python_environment
+ag rule query python_environment --subcategory virtual_environments
+ag rule query python_environment --subcategory virtual_environments --key location
 
 # List rule categories
-./ag rule list
+ag rule list
 
 # List utility scripts
-./ag rule list --utility-scripts
+ag rule list --utility-scripts
 ```
 
 This script uses a structured rules file (`rules.json`) that contains all the framework rules in a machine-readable format, enabling programmatic access and verification.
@@ -131,10 +139,10 @@ The env commands verify that the environment is set up correctly:
 
 ```bash
 # Run a complete environment check
-./ag env check
+ag env check
 
 # Run environment check and automatically fix common issues
-./ag env fix
+ag env fix
 ```
 
 This script checks:
@@ -152,39 +160,39 @@ The venv commands help manage Python virtual environments:
 
 ```bash
 # List all registered virtual environments
-./ag venv list
+ag venv list
 
 # List with detailed information
-./ag venv list --verbose
+ag venv list --verbose
 
 # List with package information
-./ag venv list --packages
+ag venv list --packages
 
 # Add a virtual environment to the registry
-./ag venv add /path/to/venv project-name
+ag venv add /path/to/venv project-name
 
 # Add with additional information
-./ag venv add /path/to/venv project-name --description "Description" --python-version "3.12.9"
+ag venv add /path/to/venv project-name --description "Description" --python-version "3.12.9"
 
 # Remove a virtual environment from the registry
-./ag venv remove --project-name project-name
-./ag venv remove --venv-path /path/to/venv
+ag venv remove --project-name project-name
+ag venv remove --venv-path /path/to/venv
 
 # Check if a virtual environment is registered and verify its status
-./ag venv check --project-name project-name
-./ag venv check --venv-path /path/to/venv
+ag venv check --project-name project-name
+ag venv check --venv-path /path/to/venv
 
 # Update the package list for a virtual environment
-./ag venv update-packages --project-name project-name
+ag venv update-packages --project-name project-name
 
 # Clean up non-existent virtual environments
-./ag venv cleanup
+ag venv cleanup
 
 # Scan for and repair the registry
-./ag venv repair
+ag venv repair
 
 # Create a backup of the registry
-./ag venv backup
+ag venv backup
 ```
 
 ### Project Creation
@@ -193,10 +201,10 @@ The project commands create new projects with the standard structure:
 
 ```bash
 # Create a new project
-./ag project create "My New Project" --description "A description of the project"
+ag project create "My New Project" --description "A description of the project"
 
 # Create a new project with a specific license
-./ag project create "My New Project" --license Apache-2.0
+ag project create "My New Project" --license Apache-2.0
 ```
 
 ### UV Package Manager
@@ -205,36 +213,36 @@ The uv commands help with installing and managing uv:
 
 ```bash
 # Install uv
-./ag uv install
+ag uv install
 
 # Update uv
-./ag uv update
+ag uv update
 
 # List available Python versions
-./ag uv list-python
+ag uv list-python
 
 # Install a specific Python version
-./ag uv install-python 3.11
+ag uv install-python 3.11
 
 # Create a virtual environment
-./ag uv create-venv /path/to/venv --python 3.11
+ag uv create-venv /path/to/venv --python 3.11
 
 # Create with custom timeout and retries
-./ag uv create-venv /path/to/venv --python 3.11 --timeout 600 --retries 5
+ag uv create-venv /path/to/venv --python 3.11 --timeout 600 --retries 5
 
 # Install dependencies in a virtual environment
-./ag uv install-deps /path/to/venv --requirements requirements.txt
-./ag uv install-deps /path/to/venv --packages numpy pandas matplotlib
+ag uv install-deps /path/to/venv --requirements requirements.txt
+ag uv install-deps /path/to/venv --packages numpy pandas matplotlib
 
 # Install a project in editable mode
-./ag uv install-editable /path/to/venv /path/to/project
+ag uv install-editable /path/to/venv /path/to/project
 
 # Show information about uv
-./ag uv info
+ag uv info
 
 # Clean the uv cache
-./ag uv clean-cache
-./ag uv clean-cache --older-than 30
+ag uv clean-cache
+ag uv clean-cache --older-than 30
 ```
 
 ### Cleanup and Maintenance
@@ -243,16 +251,16 @@ The cleanup commands help with cleaning up temporary files and maintaining the d
 
 ```bash
 # Clean up temporary files older than 7 days
-./ag cleanup tmp
+ag cleanup tmp
 
 # Check for orphaned virtual environments
-./ag cleanup check-orphaned-venvs
+ag cleanup check-orphaned-venvs
 
 # Check the directory structure
-./ag cleanup check-structure
+ag cleanup check-structure
 
 # Analyze disk usage
-./ag cleanup disk-usage
+ag cleanup disk-usage
 ```
 
 ## Key Features
@@ -294,10 +302,15 @@ The Agentic framework includes several key features to ensure robustness and rel
 
 To work with this framework:
 
-1. Clone this repository
-2. Run the setup command to fully set up the environment:
+1. Clone this repository for documentation and rules
+2. Install the command-line tool:
    ```bash
-   ./ag setup all
+   pip install agentic-core
+   ```
+
+3. Run the setup command to fully set up the environment:
+   ```bash
+   ag setup all
    ```
    This command will:
    - Install required dependencies (uv)
@@ -308,24 +321,21 @@ To work with this framework:
    You can also run specific setup steps:
    ```bash
    # Install dependencies only
-   ./ag setup install-dependencies
+   ag setup install-dependencies
    
    # Create directories only
-   ./ag setup create-directories
+   ag setup create-directories
    
    # Initialize registry only
-   ./ag setup initialize-registry
-   
-   # Make scripts executable
-   ./ag setup make-scripts-executable
+   ag setup initialize-registry
    ```
 
    If you encounter issues with the automated setup (particularly network-related issues when installing dependencies), you can follow the [Manual Setup Guide](MANUAL_SETUP.md) to set up the environment manually.
 
-3. Run `./ag env check` to verify the environment is set up correctly
-4. Read the [Human Guide](HUMAN_GUIDE.md) for detailed instructions on how to use the framework
-5. Use the utility scripts to manage your projects and environments
-6. Follow the directory structure and guidelines when creating new projects
+4. Run `ag env check` to verify the environment is set up correctly
+5. Read the [Human Guide](HUMAN_GUIDE.md) for detailed instructions on how to use the framework
+6. Use the command-line tool to manage your projects and environments
+7. Follow the directory structure and guidelines when creating new projects
 
 For AI agents: Review the [Agent Operation Rules](AGENT_RULES.md) or the [Quick Reference Guide](AGENT_QUICK_REFERENCE.md) to understand how to operate within this framework.
 

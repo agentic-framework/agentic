@@ -17,7 +17,6 @@ $HOME/
     │   │   ├── LESSON_LEARNED.md  # Lessons learned during development
     │   │   └── CONSOLIDATED_DOCS.md  # Consolidated documentation
     │   ├── scripts/          # Legacy utility scripts (moved to agentic-core)
-    │   ├── ag                # Main command-line interface (symlink to agentic-core)
     │   ├── LICENSE           # License file
     │   ├── rules.json        # Structured rules in machine-readable format
     │   └── agentic_info.json # Framework configuration
@@ -84,11 +83,11 @@ Projects should always be created in the projects directory, not in the git-mana
 
 ```bash
 # Correct
-$HOME/Agentic/agentic/ag project create "My Project"  # This will create the project in $HOME/Agentic/projects/my-project
+ag project create "My Project"  # This will create the project in $HOME/Agentic/projects/my-project
 
 # Incorrect
 cd $HOME/Agentic/agentic
-./ag project create "My Project"  # Don't create projects inside the git repository
+mkdir my-project  # Don't create projects inside the git repository
 ```
 
 ### When Referencing Paths in Scripts
@@ -113,8 +112,10 @@ $HOME/Agentic/                  <-- Root Agentic folder (not git-managed)
 │
 ├── agentic/                    <-- Git repository (git-managed)
 │   ├── docs/                   <-- Documentation files
-│   ├── scripts/                <-- Utility scripts
-│   └── ag                      <-- Main CLI interface
+│   └── scripts/                <-- Legacy utility scripts
+│
+├── projects/                   <-- Projects directory
+│   └── agentic-core/           <-- Command line tool framework
 │
 └── [other directories]         <-- Not git-managed
 ```
