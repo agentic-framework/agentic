@@ -125,8 +125,12 @@ def get_uv_version():
     result = run_command("uv --version")
     return result
 
-def install_uv():
-    """Install uv using the official installation script."""
+def is_homebrew_installed():
+    """Check if Homebrew is installed."""
+    return shutil.which("brew") is not None
+
+def install_uv(args=None):
+    """Install uv using the appropriate method for the current OS."""
     if is_uv_installed():
         print(f"uv is already installed (version {get_uv_version()})")
         return True
@@ -134,8 +138,151 @@ def install_uv():
     print("Installing uv...")
     logger.info("Installing uv")
     
-    # Use the official installation script
-    result = run_command("curl -sSf https://astral.sh/uv/install.sh | sh", capture_output=False)
+    # Check if we're on macOS
+    is_macos = platform.system() == "Darwin"
+    
+    if is_macos:
+        print("Detected macOS. Attempting to install uv using direct download...")
+        logger.info("Attempting to install uv using direct download")
+        
+        # Create directories for installation
+        home_dir = Path.home()
+        bin_dir = home_dir / ".local" / "bin"
+        os.makedirs(bin_dir, exist_ok=True)
+        
+        # Determine architecture
+        arch = platform.machine()
+        if arch == "x86_64":
+            arch_name = "x64"
+        elif arch == "arm64":
+            arch_name = "aarch64"
+        else:
+            print(f"Unsupported architecture: {arch}. Falling back to official installer.")
+            logger.warning(f"Unsupported architecture: {arch}. Falling back to official installer")
+            arch_name = None
+        
+        if arch_name:
+            # Download pre-compiled binary
+            uv_url = f"https://github.com/astral-sh/uv/releases/latest/download/uv-{arch_name}-apple-darwin.tar.gz"
+            temp_dir = tempfile.mkdtemp(prefix="uv_install_", dir=CACHE_DIR)
+            tar_path = os.path.join(temp_dir, "uv.tar.gz")
+            
+            try:
+                # Download the tarball
+                download_cmd = f"curl -sSL {uv_url} -o {tar_path}"
+                download_result = run_command(download_cmd, capture_output=True)
+                
+                if download_result is None:
+                    print("Failed to download uv binary.")
+                    logger.error("Failed to download uv binary")
+                else:
+                    # Extract the binary
+                    extract_cmd = f"tar -xzf {tar_path} -C {temp_dir}"
+                    extract_result = run_command(extract_cmd, capture_output=True)
+                    
+                    if extract_result is None:
+                        print("Failed to extract uv binary.")
+                        logger.error("Failed to extract uv binary")
+                    else:
+                        # Copy the binary to the bin directory
+                        uv_bin_path = os.path.join(temp_dir, "uv")
+                        if os.path.exists(uv_bin_path):
+                            dest_path = os.path.join(bin_dir, "uv")
+                            shutil.copy2(uv_bin_path, dest_path)
+                            os.chmod(dest_path, 0o755)
+                            
+                            print(f"uv binary installed to {dest_path}")
+                            logger.info(f"uv binary installed to {dest_path}")
+                            
+                            # Add to PATH if not already there
+                            if not is_uv_installed():
+                                print(f"\nuv was installed but is not in your PATH.")
+                                print(f"Add this directory to your PATH: {bin_dir}")
+                                print(f"Run: export PATH=\"{bin_dir}:$PATH\"")
+                                logger.warning("uv installed but not in PATH")
+                                
+                                # Try to add to PATH temporarily for this session
+                                os.environ["PATH"] = f"{bin_dir}:{os.environ.get('PATH', '')}"
+                                
+                                if is_uv_installed():
+                                    version = get_uv_version()
+                                    print(f"uv is now available in this session (version {version})")
+                                    logger.info(f"uv is now available in this session (version {version})")
+                                    return True
+                            else:
+                                version = get_uv_version()
+                                print(f"uv installed successfully (version {version})")
+                                logger.info(f"uv installed successfully (version {version})")
+                                return True
+            finally:
+                # Clean up the temporary directory
+                try:
+                    shutil.rmtree(temp_dir)
+                except Exception as e:
+                    logger.warning(f"Failed to clean up temporary directory: {e}")
+        
+        # If we get here, direct download failed or was skipped
+        print("Direct download method failed. Trying Homebrew if available...")
+        logger.warning("Direct download method failed. Trying Homebrew if available...")
+        
+        # Check if Homebrew is installed
+        has_homebrew = is_homebrew_installed()
+        if has_homebrew:
+            print("Attempting to install uv using Homebrew...")
+            logger.info("Attempting to install uv using Homebrew")
+            
+            # Try to install uv using Homebrew with increased timeout
+            brew_cmd = "brew install uv"
+            brew_result = run_command(brew_cmd, capture_output=False, timeout=600)  # 10 minutes timeout
+            
+            if brew_result is not None:
+                # Check if uv is now in the PATH
+                if is_uv_installed():
+                    version = get_uv_version()
+                    print(f"uv installed successfully via Homebrew (version {version})")
+                    logger.info(f"uv installed successfully via Homebrew (version {version})")
+                    return True
+                else:
+                    print("Homebrew installation completed but uv is not in PATH.")
+                    logger.warning("Homebrew installation completed but uv is not in PATH")
+            else:
+                print("Failed to install uv via Homebrew. Falling back to official installer.")
+                logger.warning("Failed to install uv via Homebrew. Falling back to official installer")
+    
+    # Use a different approach - download the installer to a temp file and execute it
+    temp_dir = tempfile.mkdtemp(prefix="uv_install_", dir=CACHE_DIR)
+    installer_path = os.path.join(temp_dir, "uv-installer.sh")
+    
+    try:
+        # Download the installer
+        download_cmd = f"curl -sSf https://github.com/astral-sh/uv/releases/latest/download/uv-installer.sh -o {installer_path}"
+        download_result = run_command(download_cmd, capture_output=True)
+        
+        if download_result is None:
+            print("Failed to download the uv installer.")
+            logger.error("Failed to download the uv installer")
+            return False
+        
+        # Make the installer executable
+        os.chmod(installer_path, 0o755)
+        
+        # Execute the installer with verbose output
+        install_cmd = f"bash -x {installer_path}"
+        install_output = run_command(install_cmd, capture_output=True)
+        
+        if install_output:
+            print("Installation output:")
+            print(install_output)
+            logger.info(f"Installation output: {install_output}")
+            
+        # Consider the installation successful if we got output
+        result = install_output is not None
+    finally:
+        # Clean up the temporary directory
+        try:
+            shutil.rmtree(temp_dir)
+        except Exception as e:
+            logger.warning(f"Failed to clean up temporary directory: {e}")
     
     if result is None:
         print("Failed to install uv.")
@@ -181,8 +328,133 @@ def update_uv():
     print("Updating uv...")
     logger.info(f"Updating uv from version {current_version}")
     
+    # Check if we're on macOS
+    is_macos = platform.system() == "Darwin"
+    
+    if is_macos:
+        print("Detected macOS. Attempting to update uv using direct download...")
+        logger.info("Attempting to update uv using direct download")
+        
+        # Determine architecture
+        arch = platform.machine()
+        if arch == "x86_64":
+            arch_name = "x64"
+        elif arch == "arm64":
+            arch_name = "aarch64"
+        else:
+            print(f"Unsupported architecture: {arch}. Falling back to official installer.")
+            logger.warning(f"Unsupported architecture: {arch}. Falling back to official installer")
+            arch_name = None
+        
+        if arch_name:
+            # Find the current uv binary path
+            uv_path = shutil.which("uv")
+            if uv_path:
+                uv_dir = os.path.dirname(uv_path)
+                
+                # Download pre-compiled binary
+                uv_url = f"https://github.com/astral-sh/uv/releases/latest/download/uv-{arch_name}-apple-darwin.tar.gz"
+                temp_dir = tempfile.mkdtemp(prefix="uv_update_", dir=CACHE_DIR)
+                tar_path = os.path.join(temp_dir, "uv.tar.gz")
+                
+                try:
+                    # Download the tarball
+                    download_cmd = f"curl -sSL {uv_url} -o {tar_path}"
+                    download_result = run_command(download_cmd, capture_output=True)
+                    
+                    if download_result is None:
+                        print("Failed to download uv binary.")
+                        logger.error("Failed to download uv binary")
+                    else:
+                        # Extract the binary
+                        extract_cmd = f"tar -xzf {tar_path} -C {temp_dir}"
+                        extract_result = run_command(extract_cmd, capture_output=True)
+                        
+                        if extract_result is None:
+                            print("Failed to extract uv binary.")
+                            logger.error("Failed to extract uv binary")
+                        else:
+                            # Copy the binary to the existing location
+                            uv_bin_path = os.path.join(temp_dir, "uv")
+                            if os.path.exists(uv_bin_path):
+                                # Backup the old binary
+                                backup_path = f"{uv_path}.bak"
+                                try:
+                                    shutil.copy2(uv_path, backup_path)
+                                    logger.info(f"Backed up old uv binary to {backup_path}")
+                                except Exception as e:
+                                    logger.warning(f"Failed to backup old uv binary: {e}")
+                                
+                                # Replace with the new binary
+                                try:
+                                    shutil.copy2(uv_bin_path, uv_path)
+                                    os.chmod(uv_path, 0o755)
+                                    
+                                    new_version = get_uv_version()
+                                    if new_version == current_version:
+                                        print("uv is already at the latest version.")
+                                        logger.info("uv is already at the latest version")
+                                    else:
+                                        print(f"uv updated successfully via direct download: {current_version} -> {new_version}")
+                                        logger.info(f"uv updated successfully via direct download: {current_version} -> {new_version}")
+                                    return True
+                                except Exception as e:
+                                    logger.error(f"Failed to replace uv binary: {e}")
+                                    print(f"Failed to replace uv binary: {e}")
+                                    
+                                    # Try to restore backup
+                                    try:
+                                        if os.path.exists(backup_path):
+                                            shutil.copy2(backup_path, uv_path)
+                                            logger.info("Restored backup of uv binary")
+                                            print("Restored backup of uv binary")
+                                    except Exception as e:
+                                        logger.error(f"Failed to restore backup: {e}")
+                finally:
+                    # Clean up the temporary directory
+                    try:
+                        shutil.rmtree(temp_dir)
+                    except Exception as e:
+                        logger.warning(f"Failed to clean up temporary directory: {e}")
+        
+        # If we get here, direct download failed or was skipped
+        print("Direct download method failed. Trying Homebrew if available...")
+        logger.warning("Direct download method failed. Trying Homebrew if available...")
+        
+        # Check if Homebrew is installed
+        has_homebrew = is_homebrew_installed()
+        if has_homebrew:
+            print("Attempting to update uv using Homebrew...")
+            logger.info("Attempting to update uv using Homebrew")
+            
+            # Try to update uv using Homebrew with increased timeout
+            brew_cmd = "brew upgrade uv || brew install uv"
+            brew_result = run_command(brew_cmd, capture_output=False, timeout=600)  # 10 minutes timeout
+            
+            if brew_result is not None:
+                # Check if uv is now in the PATH
+                if is_uv_installed():
+                    new_version = get_uv_version()
+                    if new_version == current_version:
+                        print("uv is already at the latest version.")
+                        logger.info("uv is already at the latest version")
+                    else:
+                        print(f"uv updated successfully via Homebrew: {current_version} -> {new_version}")
+                        logger.info(f"uv updated successfully via Homebrew: {current_version} -> {new_version}")
+                    return True
+                else:
+                    print("Homebrew update completed but uv is not in PATH.")
+                    logger.warning("Homebrew update completed but uv is not in PATH")
+            else:
+                print("Failed to update uv via Homebrew. Falling back to official installer.")
+                logger.warning("Failed to update uv via Homebrew. Falling back to official installer")
+    
+    # Fall back to the official installer method
+    print("Using official installer script for update...")
+    logger.info("Using official installer script for update")
+    
     # Use the official installation script to update
-    result = run_command("curl -sSf https://astral.sh/uv/install.sh | sh", capture_output=False)
+    result = run_command("curl -sSf https://github.com/astral-sh/uv/releases/latest/download/uv-installer.sh | sh", capture_output=False)
     
     if result is None:
         print("Failed to update uv.")
