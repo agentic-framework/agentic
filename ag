@@ -32,7 +32,36 @@ COMMAND_STRUCTURE = {
                 "description": "Check the environment setup",
                 "module": "check_environment",
                 "function": "check_environment"
+                "issues": {
+        "description": "Issue tracking commands",
+        "subcommands": {
+            "submit": {
+                "description": "Submit a new issue",
+                "module": "issues_command",
+                "function": "issues_command"
             },
+            "list": {
+                "description": "List issues",
+                "module": "issues_command",
+                "function": "issues_command"
+            },
+            "show": {
+                "description": "Show issue details",
+                "module": "issues_command",
+                "function": "issues_command"
+            },
+            "comment": {
+                "description": "Add a comment to an issue",
+                "module": "issues_command",
+                "function": "issues_command"
+            },
+            "update": {
+                "description": "Update an issue",
+                "module": "issues_command",
+                "function": "issues_command"
+            }
+        }
+    },},
             "fix": {
                 "description": "Fix common environment issues",
                 "module": "check_environment",
