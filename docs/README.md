@@ -37,13 +37,6 @@ $HOME/Agentic/
 │   ├── docs/             # Documentation files
 │   ├── scripts/          # Legacy utility scripts
 │   └── LICENSE           # License file
-├── projects/agentic-core/ # Command line tool framework
-│   ├── src/              # Source code
-│   │   └── agentic_core/ # Main package
-│   │       ├── cli.py    # Main CLI implementation
-│   │       ├── commands/ # Command implementations
-│   │       └── bin/      # Executable scripts
-│   └── README.md         # Documentation
 ├── projects/             # All agent-created projects
 ├── shared/               # Shared resources
 ├── tmp/                  # Temporary files
