@@ -31,7 +31,7 @@ COMMAND_STRUCTURE = {
             "check": {
                 "description": "Check the environment setup",
                 "module": "check_environment",
-                "function": "check_environment"
+                "function": "check_environment",
                 "issues": {
         "description": "Issue tracking commands",
         "subcommands": {
