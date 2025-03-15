@@ -22,7 +22,7 @@ The Agentic Plan is organized into several projects, each with its own purpose a
 | agentic-issue | Issue tracking system | Manages and tracks issues for the agent |
 | agentic-note | Agent's notebook | Provides note-taking capabilities for the agent |
 | agentic-plan | Work planning tool | Facilitates the agent's work planning and organization |
-| agentic-calendar | Schedule/calendar system | Manages the agent's calendar and scheduling |
+| agentic-todo | Schedule/calendar system | Manages the agent's todo list and scheduling |
 | agentic-search | Local search engine | Provides local search capabilities for the agent |
 
 
