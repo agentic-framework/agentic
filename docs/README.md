@@ -22,7 +22,7 @@ The documentation is organized into six main sections:
 To use the Agentic framework, you need to install the command-line tool:
 
 ```bash
-pip install agentic-core
+pip install git+https://github.com/agentic-framework/agentic-core.git
 ```
 
 This will make the `ag` command available in your environment.
@@ -298,7 +298,7 @@ To work with this framework:
 1. Clone this repository for documentation and rules
 2. Install the command-line tool:
    ```bash
-   pip install agentic-core
+   pip install git+https://github.com/agentic-framework/agentic-core.git
    ```
 
 3. Run the setup command to fully set up the environment:
