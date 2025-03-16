@@ -8,7 +8,7 @@ This repository contains rules, guidelines, and tools for allowing AI agents to 
 
 ## Documentation Structure
 
-The documentation is organized into six main sections:
+The documentation is organized into several main sections:
 
 - **For Humans (Overview)**: This README provides an overview of the framework, its features, and basic usage instructions.
 - **For Humans (Detailed Guide)**: The [Human Guide](HUMAN_GUIDE.md) provides detailed instructions for human users on how to effectively use the framework and work with AI agents.
@@ -16,36 +16,92 @@ The documentation is organized into six main sections:
 - **For Agents (Quick Reference)**: The [Agent Quick Reference Guide](AGENT_QUICK_REFERENCE.md) provides a concise summary of essential information for AI agents, serving as a quick lookup resource for common tasks and rules.
 - **Directory Structure**: The [Directory Structure Guide](DIRECTORY_STRUCTURE.md) provides a detailed explanation of the framework's directory structure, specifically addressing the distinction between the root Agentic folder and the git-managed repository folder.
 - **Lessons Learned**: The [Lessons Learned](LESSON_LEARNED.md) document records important lessons learned during the development and maintenance of the framework, particularly focusing on git operations and common pitfalls.
+- **Setup Improvements**: The [Setup Improvements](SETUP_IMPROVEMENTS.md) document identifies obstacles encountered during the setup process and suggests improvements to the documentation.
+- **Manual Setup**: The [Manual Setup Guide](MANUAL_SETUP.md) provides step-by-step instructions for setting up the environment manually if you encounter issues with the automated setup.
+- **Plugin Development**: The [Plugin Development Guide](PLUGIN_DEVELOPMENT.md) explains how to develop plugins for the Agentic framework.
 
 ## Installation
 
-To use the Agentic framework, you need to install the command-line tool:
+There are two main ways to set up the Agentic framework, depending on your needs:
+
+### Option 1: User Installation (Using the Framework)
+
+If you just want to use the Agentic framework without modifying its core functionality:
 
 ```bash
+# Install the command-line tool
 pip install git+https://github.com/agentic-framework/agentic-core.git
-```
 
-This will make the `ag` command available in your environment.
+# Run the setup command to fully set up the environment
+ag setup all
 
-## Directory Structure
-
-For a detailed explanation of the directory structure, including the important distinction between the root Agentic folder and the git-managed repository folder, see the [Directory Structure Guide](DIRECTORY_STRUCTURE.md).
-
-> **Note:** The framework configuration file (`agentic_info.json`) has been moved from the `agentic` repository to the `agentic-core` repository to better align with the migration of scripts and implementation code.
-
-### Customizing the Agentic Home Directory
-
-By default, the Agentic framework uses `~/Agentic` as the home directory. You can customize this location by setting the `AGHOME` environment variable:
-
-```bash
-# Set the AGHOME environment variable
-export AGHOME=/path/to/your/custom/agentic/directory
-
-# Use the ag command with the custom location
+# Verify the environment is set up correctly
 ag env check
 ```
 
-This allows you to install the Agentic framework in a different location while maintaining all functionality.
+### Option 2: Developer Installation (Contributing to the Framework)
+
+If you want to contribute to the Agentic framework or modify its core functionality:
+
+1. **Create the directory structure**
+   ```bash
+   # Create the Agentic directory structure
+   mkdir -p ~/Agentic/{projects,shared,tmp,logs,cache,backups}
+   ```
+
+2. **Clone the repositories**
+   ```bash
+   # Clone the core repository
+   git clone git@github.com:agentic-framework/agentic-core.git ~/Agentic/projects/agentic-core
+   
+   # Clone the documentation repository
+   git clone git@github.com:agentic-framework/agentic.git ~/Agentic/agentic
+   
+   # Clone plugin repositories (optional)
+   git clone git@github.com:agentic-framework/agentic-issues.git ~/Agentic/projects/agentic-issues
+   git clone git@github.com:agentic-framework/agentic-notes.git ~/Agentic/projects/agentic-notes
+   ```
+
+3. **Create and activate a virtual environment**
+   ```bash
+   # Create a virtual environment
+   python3 -m venv ~/Agentic/.venv
+   
+   # Activate the virtual environment
+   source ~/Agentic/.venv/bin/activate
+   ```
+
+4. **Install the packages in development mode**
+   ```bash
+   # Install the core package
+   cd ~/Agentic/projects/agentic-core
+   pip install -e .
+   
+   # Install plugins (optional)
+   cd ~/Agentic/projects/agentic-issues
+   pip install -e .
+   
+   cd ~/Agentic/projects/agentic-notes
+   pip install -e .
+   ```
+
+5. **Register the virtual environment**
+   ```bash
+   ag venv add ~/Agentic/.venv agentic-core --description "Main virtual environment for Agentic framework"
+   ```
+
+6. **Verify the setup**
+   ```bash
+   # Run environment check
+   ag env check
+   
+   # Fix any issues
+   ag env fix
+   ```
+
+## Directory Structure
+
+The Agentic framework uses a specific directory structure to organize files and maintain separation between different components:
 
 ```
 $AGHOME/
@@ -64,13 +120,70 @@ $AGHOME/
 └── backups/              # Backup files for registry and other critical data
 ```
 
-## Utility Scripts
+For a detailed explanation of the directory structure, see the [Directory Structure Guide](DIRECTORY_STRUCTURE.md).
 
-This repository includes several utility scripts to help agents follow the rules and manage the environment:
+### Customizing the Agentic Home Directory
+
+By default, the Agentic framework uses `~/Agentic` as the home directory. You can customize this location by setting the `AGHOME` environment variable:
+
+```bash
+# Set the AGHOME environment variable
+export AGHOME=/path/to/your/custom/agentic/directory
+
+# Use the ag command with the custom location
+ag env check
+```
+
+This allows you to install the Agentic framework in a different location while maintaining all functionality.
+
+## Official Plugins
+
+The Agentic framework can be extended with plugins that add new functionality. Here are the official plugins:
+
+### Issues Management (agentic-issues)
+
+The issues plugin provides issue tracking capabilities for Agentic projects:
+
+```bash
+# Installation
+git clone git@github.com:agentic-framework/agentic-issues.git ~/Agentic/projects/agentic-issues
+cd ~/Agentic/projects/agentic-issues
+pip install -e .
+
+# Usage
+ag issues list
+ag issues submit --title "Issue Title" --description "Description" --priority medium --labels bug,feature
+ag issues show <issue-id>
+ag issues update <issue-id> --status resolved
+ag issues comment <issue-id> "Comment text"
+```
+
+### Note Taking (agentic-notes)
+
+The notes plugin provides note-taking capabilities for the Agentic framework:
+
+```bash
+# Installation
+git clone git@github.com:agentic-framework/agentic-notes.git ~/Agentic/projects/agentic-notes
+cd ~/Agentic/projects/agentic-notes
+pip install -e .
+
+# Usage
+ag note create "Note Title" "Note content" --tags tag1,tag2
+ag note list
+ag note view <note-id>
+ag note update <note-id> --title "New Title" --content "New content"
+ag note delete <note-id>
+ag note search "query"
+```
+
+For information on developing your own plugins, see the [Plugin Development Guide](PLUGIN_DEVELOPMENT.md).
+
+## Core Commands
+
+The Agentic framework provides a set of core commands for managing the environment:
 
 ### Security Enforcement
-
-The security commands provide technical enforcement mechanisms to ensure AI agents operate only within their designated areas:
 
 ```bash
 # Check if a path is allowed
@@ -89,11 +202,7 @@ ag security hash-file /path/to/file
 ag security verify-integrity /path/to/file expected-hash
 ```
 
-This script enforces security boundaries, validates operations, and logs security events. It helps prevent AI agents from accessing or modifying files outside their designated areas.
-
 ### Configuration Management
-
-The config commands provide a centralized configuration system for the Agentic framework:
 
 ```bash
 # Get a configuration value
@@ -115,11 +224,7 @@ ag config check /path/to/check
 ag config reset
 ```
 
-This script provides a standardized API for accessing configuration values and handles path variability across different installations. All other scripts in the framework use this configuration system to ensure consistency.
-
 ### Rule Loading and Verification
-
-The rule commands provide utilities for loading, verifying, and querying the Agentic framework rules:
 
 ```bash
 # Verify an AI agent's understanding of the rules
@@ -143,11 +248,7 @@ ag rule list
 ag rule list --utility-scripts
 ```
 
-This script uses a structured rules file (`rules.json`) that contains all the framework rules in a machine-readable format, enabling programmatic access and verification.
-
 ### Environment Check
-
-The env commands verify that the environment is set up correctly:
 
 ```bash
 # Run a complete environment check
@@ -157,18 +258,7 @@ ag env check
 ag env fix
 ```
 
-This script checks:
-- UV installation
-- Directory structure
-- Registry file
-- Utility scripts
-- Python installations
-- Virtual environments
-- Disk space
-
 ### Virtual Environment Management
-
-The venv commands help manage Python virtual environments:
 
 ```bash
 # List all registered virtual environments
@@ -209,8 +299,6 @@ ag venv backup
 
 ### Project Creation
 
-The project commands create new projects with the standard structure:
-
 ```bash
 # Create a new project
 ag project create "My New Project" --description "A description of the project"
@@ -220,8 +308,6 @@ ag project create "My New Project" --license Apache-2.0
 ```
 
 ### UV Package Manager
-
-The uv commands help with installing and managing uv:
 
 ```bash
 # Install uv
@@ -259,8 +345,6 @@ ag uv clean-cache --older-than 30
 
 ### Cleanup and Maintenance
 
-The cleanup commands help with cleaning up temporary files and maintaining the directory structure:
-
 ```bash
 # Clean up temporary files older than 7 days
 ag cleanup tmp
@@ -274,36 +358,6 @@ ag cleanup check-structure
 # Analyze disk usage
 ag cleanup disk-usage
 ```
-
-### Issues Management
-
-The issues commands help manage project issues and track bugs, features, and tasks:
-
-```bash
-# List issues for the current project
-ag issues list
-
-# List issues with specific status
-ag issues list --status open
-ag issues list --status resolved
-
-# List issues for a specific project
-ag issues list --project project-name
-
-# Show details of a specific issue
-ag issues show <issue-id>
-
-# Submit a new issue
-ag issues submit "Issue Title" "Issue Description" --priority high --labels bug,feature
-
-# Update an existing issue
-ag issues update <issue-id> --status resolved --priority low
-
-# Add a comment to an issue
-ag issues comment <issue-id> "Comment text"
-```
-
-**Note**: The `ag issues list` command is context-sensitive and shows issues for the current project by default, which is determined by the current directory name. If you're not seeing expected issues, make sure you're in the correct project directory or use the `--project` flag to specify a project explicitly.
 
 ## Command Wrapper Scripts
 
@@ -366,45 +420,38 @@ The Agentic framework includes several key features to ensure robustness and rel
 - Registry backup and restoration mechanisms
 - Recovery procedures for common failure scenarios
 
-## Getting Started
+## Troubleshooting
 
-To work with this framework:
+If you encounter issues during setup or usage, try these steps:
 
-1. Clone this repository for documentation and rules
-2. Install the command-line tool:
+1. **Run the environment check with fix option**
    ```bash
-   pip install git+https://github.com/agentic-framework/agentic-core.git
+   ag env check --fix
    ```
 
-3. Run the setup command to fully set up the environment:
+2. **Check the logs for error messages**
    ```bash
-   ag setup all
-   ```
-   This command will:
-   - Install required dependencies (uv)
-   - Create all necessary directories
-   - Initialize the virtual environment registry
-
-   You can also run specific setup steps:
-   ```bash
-   # Install dependencies only
-   ag setup install-dependencies
-   
-   # Create directories only
-   ag setup create-directories
-   
-   # Initialize registry only
-   ag setup initialize-registry
+   cat ~/Agentic/logs/agentic.log
    ```
 
-   If you encounter issues with the automated setup (particularly network-related issues when installing dependencies), you can follow the [Manual Setup Guide](MANUAL_SETUP.md) to set up the environment manually.
+3. **Verify the virtual environment registry**
+   ```bash
+   ag venv list
+   ag venv repair
+   ```
 
-4. Run `ag env check` to verify the environment is set up correctly
-5. Read the [Human Guide](HUMAN_GUIDE.md) for detailed instructions on how to use the framework
-6. Use the command-line tool to manage your projects and environments
-7. Follow the directory structure and guidelines when creating new projects
+4. **Check for missing directories**
+   ```bash
+   ag cleanup check-structure
+   ```
 
-For AI agents: Review the [Agent Operation Rules](AGENT_RULES.md) or the [Quick Reference Guide](AGENT_QUICK_REFERENCE.md) to understand how to operate within this framework.
+5. **Reinstall the core package**
+   ```bash
+   pip install --force-reinstall git+https://github.com/agentic-framework/agentic-core.git
+   ```
+
+6. **Follow the manual setup guide**
+   If automated setup fails, follow the [Manual Setup Guide](MANUAL_SETUP.md) for step-by-step instructions.
 
 ## Using with AI Agents
 
