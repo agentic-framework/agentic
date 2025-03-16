@@ -48,7 +48,7 @@ ag env check
 This allows you to install the Agentic framework in a different location while maintaining all functionality.
 
 ```
-$HOME/Agentic/
+$AGHOME/
 ├── agentic/              # Git-managed repository (rules and documentation)
 │   ├── docs/             # Documentation files
 │   ├── rules.json        # Structured rules in machine-readable format
