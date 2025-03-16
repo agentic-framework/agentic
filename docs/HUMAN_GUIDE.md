@@ -192,6 +192,24 @@ You can customize the Agentic framework to suit your needs:
 
 4. **Project Templates**: You can create custom project templates in the `$HOME/Agentic/shared/templates/` directory.
 
+5. **Custom Home Directory**: You can change the location of the Agentic home directory by setting the `AGHOME` environment variable:
+
+   ```bash
+   # Set the AGHOME environment variable
+   export AGHOME=/path/to/your/custom/agentic/directory
+   
+   # Add it to your shell profile for persistence
+   echo 'export AGHOME=/path/to/your/custom/agentic/directory' >> ~/.bashrc  # or ~/.zshrc
+   
+   # Use the ag command with the custom location
+   ag env check
+   ```
+   
+   This is useful if you want to:
+   - Install the framework on a different drive
+   - Use a shared location for multiple users
+   - Separate the framework from your home directory
+
 ## Contributing
 
 Contributions to improve the Agentic framework are welcome:

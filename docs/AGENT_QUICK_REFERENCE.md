@@ -160,3 +160,14 @@ If you encounter issues:
 2. Fix common issues: `./ag env fix`
 3. Repair registry: `./ag venv repair`
 4. Clean up invalid environments: `./ag venv cleanup`
+
+## Environment Variables
+
+The Agentic framework uses the following environment variables:
+
+- `AGHOME`: Custom location for the Agentic home directory (default: `~/Agentic`)
+  ```bash
+  # Example: Using a custom Agentic home directory
+  export AGHOME=/path/to/custom/agentic
+  ag env check
+  ```

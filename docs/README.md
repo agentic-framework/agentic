@@ -33,6 +33,20 @@ For a detailed explanation of the directory structure, including the important d
 
 > **Note:** The framework configuration file (`agentic_info.json`) has been moved from the `agentic` repository to the `agentic-core` repository to better align with the migration of scripts and implementation code.
 
+### Customizing the Agentic Home Directory
+
+By default, the Agentic framework uses `~/Agentic` as the home directory. You can customize this location by setting the `AGHOME` environment variable:
+
+```bash
+# Set the AGHOME environment variable
+export AGHOME=/path/to/your/custom/agentic/directory
+
+# Use the ag command with the custom location
+ag env check
+```
+
+This allows you to install the Agentic framework in a different location while maintaining all functionality.
+
 ```
 $HOME/Agentic/
 ├── agentic/              # Git-managed repository (rules and documentation)
