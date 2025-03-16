@@ -1,0 +1,103 @@
+#!/bin/bash
+# agx-content - A content handler for the ag command
+#
+# This script handles large content by using a temporary file for commands that involve
+# creating or updating notes or issues.
+
+# Get the directory where this script is located
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# Define the path to the Agentic home directory
+AGENTIC_HOME="${AGHOME:-$HOME/Agentic}"
+
+# Create the temporary directory if it doesn't exist
+TMP_DIR="$AGENTIC_HOME/tmp"
+mkdir -p "$TMP_DIR"
+
+# Function to check if the command is a note or issue command with content
+is_content_command() {
+    local cmd="$1"
+    local subcmd="$2"
+    
+    if [[ "$cmd" == "note" && ("$subcmd" == "create" || "$subcmd" == "update") ]]; then
+        return 0
+    elif [[ "$cmd" == "issues" && ("$subcmd" == "submit" || "$subcmd" == "update" || "$subcmd" == "comment") ]]; then
+        return 0
+    else
+        return 1
+    fi
+}
+
+# Function to extract content from arguments
+extract_content() {
+    local args=("$@")
+    local content=""
+    local in_content=false
+    
+    for arg in "${args[@]}"; do
+        if [[ "$arg" == "--content" ]]; then
+            in_content=true
+        elif [[ "$in_content" == true ]]; then
+            content="$arg"
+            break
+        fi
+    done
+    
+    echo "$content"
+}
+
+# Function to replace content with file in arguments
+replace_content_with_file() {
+    local args=("$@")
+    local tmp_file="$TMP_DIR/ag_content_$$.txt"
+    local content=""
+    local in_content=false
+    local result=()
+    
+    for arg in "${args[@]}"; do
+        if [[ "$in_content" == true ]]; then
+            # Write content to temporary file
+            echo "$arg" > "$tmp_file"
+            # Replace content with file reference
+            result+=("--content-file" "$tmp_file")
+            in_content=false
+        elif [[ "$arg" == "--content" ]]; then
+            in_content=true
+        else
+            result+=("$arg")
+        fi
+    done
+    
+    # If we ended with --content but no value, add an empty file
+    if [[ "$in_content" == true ]]; then
+        touch "$tmp_file"
+        result+=("--content-file" "$tmp_file")
+    fi
+    
+    echo "${result[@]}"
+}
+
+# Parse the command and subcommand
+if [[ $# -ge 2 ]]; then
+    cmd="$1"
+    subcmd="$2"
+    
+    # Check if this is a command that needs content handling
+    if is_content_command "$cmd" "$subcmd"; then
+        # Extract the content from the arguments
+        content=$(extract_content "${@:3}")
+        
+        # If content is large (more than 1000 characters), use a file
+        if [[ ${#content} -gt 1000 || "$content" == *"\`"* || "$content" == *"'"* || "$content" == *"\""* ]]; then
+            # Replace content with file reference in arguments
+            new_args=$(replace_content_with_file "$@")
+            
+            # Run the ag command with the new arguments
+            eval "$SCRIPT_DIR/agx $new_args"
+            exit $?
+        fi
+    fi
+fi
+
+# For all other cases, just pass through to the regular launcher
+"$SCRIPT_DIR/agx" "$@"

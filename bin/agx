@@ -1,0 +1,32 @@
+#!/bin/bash
+# agx - Executable launcher for the ag command
+#
+# This script detects the appropriate virtual environment to use and runs the ag command.
+# It can be installed globally and used as a replacement for the ag command.
+#
+# Usage: agx [arguments]
+#
+# Example: agx note list
+
+# Define the path to the Agentic home directory
+AGENTIC_HOME="${AGHOME:-$HOME/Agentic}"
+
+# Get the current working directory
+CURRENT_DIR="$(pwd)"
+
+# Check if we're in a project directory
+if [ -d "$CURRENT_DIR/.venv" ] && [ -f "$CURRENT_DIR/.venv/bin/ag" ]; then
+    # Use the ag command from the current project's virtual environment
+    "$CURRENT_DIR/.venv/bin/ag" "$@"
+elif [ -d "$AGENTIC_HOME/projects/agentic-core/.venv" ] && [ -f "$AGENTIC_HOME/projects/agentic-core/.venv/bin/ag" ]; then
+    # Use the ag command from the agentic-core project's virtual environment
+    "$AGENTIC_HOME/projects/agentic-core/.venv/bin/ag" "$@"
+else
+    echo "Error: ag command not found."
+    echo "Please make sure you have activated the appropriate virtual environment."
+    echo "You can activate the virtual environment with:"
+    echo "  source /path/to/venv/bin/activate"
+    echo "Or use the full path to the ag command:"
+    echo "  /path/to/venv/bin/ag"
+    exit 1
+fi
