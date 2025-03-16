@@ -275,6 +275,36 @@ ag cleanup check-structure
 ag cleanup disk-usage
 ```
 
+### Issues Management
+
+The issues commands help manage project issues and track bugs, features, and tasks:
+
+```bash
+# List issues for the current project
+ag issues list
+
+# List issues with specific status
+ag issues list --status open
+ag issues list --status resolved
+
+# List issues for a specific project
+ag issues list --project project-name
+
+# Show details of a specific issue
+ag issues show <issue-id>
+
+# Submit a new issue
+ag issues submit "Issue Title" "Issue Description" --priority high --labels bug,feature
+
+# Update an existing issue
+ag issues update <issue-id> --status resolved --priority low
+
+# Add a comment to an issue
+ag issues comment <issue-id> "Comment text"
+```
+
+**Note**: The `ag issues list` command is context-sensitive and shows issues for the current project by default, which is determined by the current directory name. If you're not seeing expected issues, make sure you're in the correct project directory or use the `--project` flag to specify a project explicitly.
+
 ## Command Wrapper Scripts
 
 The Agentic framework includes wrapper scripts that improve the usability of the `ag` command:
