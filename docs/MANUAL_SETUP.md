@@ -84,6 +84,47 @@ cd $HOME/Agentic/agentic
 ./ag venv create $HOME/Agentic/projects/your-project/.venv --python 3.11
 ```
 
+## Optional: Setting Up Command Wrapper Scripts
+
+The Agentic framework includes wrapper scripts that improve the usability of the `ag` command. These scripts are located in the `bin` directory of the agentic repository.
+
+### Setting Up the Command Launcher
+
+The `agx` script is a launcher for the `ag` command that detects the appropriate virtual environment to use:
+
+```bash
+# Make the script executable
+chmod +x $HOME/Agentic/agentic/bin/agx
+
+# Add to PATH for system-wide access
+$HOME/Agentic/agentic/add_ag_to_path.sh
+```
+
+This script makes the `ag` command available from anywhere by creating a symbolic link in `$HOME/bin`.
+
+### Setting Up the Content Handler
+
+The `agx-content` script handles large content and special characters in commands:
+
+```bash
+# Make the script executable
+chmod +x $HOME/Agentic/agentic/bin/agx-content
+
+# Install the content handler
+$HOME/Agentic/agentic/fix_shell_issues.sh
+```
+
+This script automatically uses temporary files for large content or content with special characters, solving issues with shell escaping.
+
+### Fixing Permission Issues
+
+If you encounter permission issues with the `ag` command, you can fix them with:
+
+```bash
+# Fix permission issues
+$HOME/Agentic/agentic/fix_ag_permissions.sh
+```
+
 ## Troubleshooting
 
 ### Logs Directory Missing

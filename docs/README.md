@@ -50,6 +50,7 @@ This allows you to install the Agentic framework in a different location while m
 ```
 $AGHOME/
 ├── agentic/              # Git-managed repository (rules and documentation)
+│   ├── bin/              # Executable scripts (agx, agx-content)
 │   ├── docs/             # Documentation files
 │   ├── rules.json        # Structured rules in machine-readable format
 │   └── LICENSE           # License file
@@ -272,6 +273,44 @@ ag cleanup check-structure
 
 # Analyze disk usage
 ag cleanup disk-usage
+```
+
+## Command Wrapper Scripts
+
+The Agentic framework includes wrapper scripts that improve the usability of the `ag` command:
+
+### agx - Command Launcher
+
+The `agx` script is a launcher for the `ag` command that detects the appropriate virtual environment to use:
+
+```bash
+# Use the agx script directly
+$AGHOME/agentic/bin/agx note list
+
+# Add to PATH for system-wide access
+$AGHOME/agentic/add_ag_to_path.sh
+```
+
+This script makes the `ag` command available from anywhere by creating a symbolic link in `$HOME/bin`.
+
+### agx-content - Content Handler
+
+The `agx-content` script handles large content and special characters in commands:
+
+```bash
+# Install the content handler
+$AGHOME/agentic/fix_shell_issues.sh
+```
+
+This script automatically uses temporary files for large content or content with special characters, solving issues with shell escaping.
+
+### Permission Fixer
+
+If you encounter permission issues with the `ag` command, you can fix them with:
+
+```bash
+# Fix permission issues
+$AGHOME/agentic/fix_ag_permissions.sh
 ```
 
 ## Key Features

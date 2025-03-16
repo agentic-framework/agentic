@@ -8,6 +8,7 @@ This document provides a clear explanation of the Agentic framework's directory 
 $HOME/
 └── Agentic/                  # Root Agentic folder (not under version control)
     ├── agentic/              # Git-managed repository folder (under version control)
+    │   ├── bin/              # Executable scripts (agx, agx-content)
     │   ├── docs/             # Documentation files
     │   │   ├── README.md     # Framework overview
     │   │   ├── AGENT_RULES.md  # Comprehensive rules for AI agents
@@ -42,7 +43,7 @@ $HOME/
 
 - **Purpose**: Contains the core framework documentation and rules
 - **Version Control**: Under git version control
-- **Content**: Organized into `docs/` (documentation files) directory
+- **Content**: Organized into `bin/` (executable scripts) and `docs/` (documentation files) directories
 - **Management**: Managed through git commands (pull, push, commit, etc.)
 - **Path Reference**: Always referenced as `$HOME/Agentic/agentic` in documentation
 
@@ -96,6 +97,7 @@ PROJECTS_DIR = os.path.join(AGENTIC_DIR, "projects")  # This would incorrectly p
 $HOME/Agentic/                  <-- Root Agentic folder (not git-managed)
 │
 ├── agentic/                    <-- Git repository (git-managed)
+│   ├── bin/                    <-- Executable scripts (agx, agx-content)
 │   ├── docs/                   <-- Documentation files
 │   └── rules.json              <-- Structured rules in machine-readable format
 │
