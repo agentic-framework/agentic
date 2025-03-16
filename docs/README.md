@@ -31,13 +31,18 @@ This will make the `ag` command available in your environment.
 
 For a detailed explanation of the directory structure, including the important distinction between the root Agentic folder and the git-managed repository folder, see the [Directory Structure Guide](DIRECTORY_STRUCTURE.md).
 
+> **Note:** The framework configuration file (`agentic_info.json`) has been moved from the `agentic` repository to the `agentic-core` repository to better align with the migration of scripts and implementation code.
+
 ```
 $HOME/Agentic/
 ├── agentic/              # Git-managed repository (rules and documentation)
 │   ├── docs/             # Documentation files
 │   ├── scripts/          # Legacy utility scripts
+│   ├── rules.json        # Structured rules in machine-readable format
 │   └── LICENSE           # License file
 ├── projects/             # All agent-created projects
+│   └── agentic-core/     # Core implementation repository
+│       └── agentic_info.json  # Framework configuration
 ├── shared/               # Shared resources
 ├── tmp/                  # Temporary files
 ├── logs/                 # Log files

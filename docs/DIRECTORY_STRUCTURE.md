@@ -18,8 +18,7 @@ $HOME/
     │   │   └── CONSOLIDATED_DOCS.md  # Consolidated documentation
     │   ├── scripts/          # Legacy utility scripts
     │   ├── LICENSE           # License file
-    │   ├── rules.json        # Structured rules in machine-readable format
-    │   └── agentic_info.json # Framework configuration
+    │   └── rules.json        # Structured rules in machine-readable format
     │
     ├── projects/             # All agent-created projects (not under version control)
     ├── shared/               # Shared resources between projects (not under version control)
@@ -99,9 +98,12 @@ $HOME/Agentic/                  <-- Root Agentic folder (not git-managed)
 │
 ├── agentic/                    <-- Git repository (git-managed)
 │   ├── docs/                   <-- Documentation files
-│   └── scripts/                <-- Legacy utility scripts
+│   ├── scripts/                <-- Legacy utility scripts
+│   └── rules.json              <-- Structured rules in machine-readable format
 │
 ├── projects/                   <-- Projects directory
+│   └── agentic-core/           <-- Core implementation repository
+│       └── agentic_info.json   <-- Framework configuration (moved from agentic)
 │
 └── [other directories]         <-- Not git-managed
 ```
