@@ -44,15 +44,7 @@ cat > $HOME/Agentic/venv_registry.json << EOF
 EOF
 ```
 
-### 3. Make Utility Scripts Executable
-
-Make all the utility scripts executable:
-
-```bash
-chmod +x $HOME/Agentic/agentic/scripts/*.py $HOME/Agentic/agentic/scripts/*.sh
-```
-
-### 4. Verify the Setup
+### 3. Verify the Setup
 
 Run the environment check command to verify the setup:
 

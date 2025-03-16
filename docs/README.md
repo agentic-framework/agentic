@@ -51,7 +51,6 @@ This allows you to install the Agentic framework in a different location while m
 $HOME/Agentic/
 ├── agentic/              # Git-managed repository (rules and documentation)
 │   ├── docs/             # Documentation files
-│   ├── scripts/          # Legacy utility scripts
 │   ├── rules.json        # Structured rules in machine-readable format
 │   └── LICENSE           # License file
 ├── projects/             # All agent-created projects
@@ -328,7 +327,6 @@ To work with this framework:
    - Install required dependencies (uv)
    - Create all necessary directories
    - Initialize the virtual environment registry
-   - Make utility scripts executable
 
    You can also run specific setup steps:
    ```bash

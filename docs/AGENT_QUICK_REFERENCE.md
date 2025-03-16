@@ -16,12 +16,12 @@ This document provides a concise reference of essential information for AI agent
 
 ```
 $HOME/Agentic/
-├── agentic/              # Core rules and tools
+├── agentic/              # Core rules and documentation
 │   ├── docs/             # Documentation files
-│   ├── scripts/          # Utility scripts
-│   ├── ag                # Main command-line interface
+│   ├── rules.json        # Structured rules
 │   └── LICENSE           # License file
 ├── projects/             # All agent-created projects
+│   └── agentic-core/     # Core implementation repository
 ├── shared/               # Shared resources
 ├── tmp/                  # Temporary files
 ├── logs/                 # Log files

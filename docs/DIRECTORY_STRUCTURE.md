@@ -16,7 +16,6 @@ $HOME/
     │   │   ├── DIRECTORY_STRUCTURE.md  # This file
     │   │   ├── LESSON_LEARNED.md  # Lessons learned during development
     │   │   └── CONSOLIDATED_DOCS.md  # Consolidated documentation
-    │   ├── scripts/          # Legacy utility scripts
     │   ├── LICENSE           # License file
     │   └── rules.json        # Structured rules in machine-readable format
     │
@@ -41,11 +40,11 @@ $HOME/
 
 ### Git-Managed Repository Folder (`$HOME/Agentic/agentic/`)
 
-- **Purpose**: Contains the core framework code, documentation, and utility scripts
+- **Purpose**: Contains the core framework documentation and rules
 - **Version Control**: Under git version control
-- **Content**: Organized into `docs/` (documentation files) and `scripts/` (utility scripts) directories
+- **Content**: Organized into `docs/` (documentation files) directory
 - **Management**: Managed through git commands (pull, push, commit, etc.)
-- **Path Reference**: Always referenced as `$HOME/Agentic/agentic` in documentation and scripts
+- **Path Reference**: Always referenced as `$HOME/Agentic/agentic` in documentation
 
 ## Important Considerations
 
@@ -98,7 +97,6 @@ $HOME/Agentic/                  <-- Root Agentic folder (not git-managed)
 │
 ├── agentic/                    <-- Git repository (git-managed)
 │   ├── docs/                   <-- Documentation files
-│   ├── scripts/                <-- Legacy utility scripts
 │   └── rules.json              <-- Structured rules in machine-readable format
 │
 ├── projects/                   <-- Projects directory

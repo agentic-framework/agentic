@@ -36,7 +36,7 @@ To set up the Agentic framework:
 
 1. Clone the repository to your machine
 2. Run `./ag setup all` to fully set up the environment
-   - This will install dependencies, create necessary directories, initialize the registry, and make scripts executable
+   - This will install dependencies, create necessary directories, and initialize the registry
    - You can also run specific setup steps:
      ```bash
      # Install dependencies only
@@ -47,9 +47,6 @@ To set up the Agentic framework:
      
      # Initialize registry only
      ./ag setup initialize-registry
-     
-     # Make scripts executable
-     ./ag setup make-scripts-executable
      ```
    - If you encounter issues with the automated setup (particularly network-related issues), follow the [Manual Setup Guide](MANUAL_SETUP.md) instead
 3. Run `./ag env check` to verify the environment is set up correctly
@@ -186,7 +183,7 @@ You can customize the Agentic framework to suit your needs:
 
 1. **Adding Rules**: You can add or modify rules in the AGENT_RULES.md file.
 
-2. **Custom Scripts**: You can create custom utility scripts in the `$HOME/Agentic/agentic/scripts/` directory.
+2. **Custom Commands**: You can create custom commands by developing plugins for the `ag` command-line tool.
 
 3. **Directory Structure**: You can modify the directory structure to suit your workflow.
 
