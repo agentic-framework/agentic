@@ -316,9 +316,6 @@ The `agx` script is a launcher for the `ag` command that detects the appropriate
 ```bash
 # Use the agx script directly
 $AGHOME/agentic/bin/agx note list
-
-# Add to PATH for system-wide access
-$AGHOME/agentic/add_ag_to_path.sh
 ```
 
 This script makes the `ag` command available from anywhere by creating a symbolic link in `$HOME/bin`.
@@ -333,15 +330,6 @@ $AGHOME/agentic/fix_shell_issues.sh
 ```
 
 This script automatically uses temporary files for large content or content with special characters, solving issues with shell escaping.
-
-### Permission Fixer
-
-If you encounter permission issues with the `ag` command, you can fix them with:
-
-```bash
-# Fix permission issues
-$AGHOME/agentic/fix_ag_permissions.sh
-```
 
 ## Key Features
 
