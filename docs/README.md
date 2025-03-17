@@ -151,11 +151,11 @@ cd ~/Agentic/projects/agentic-issues
 pip install -e .
 
 # Usage
-ag issues list
-ag issues submit --title "Issue Title" --description "Description" --priority medium --labels bug,feature
-ag issues show <issue-id>
-ag issues update <issue-id> --status resolved
-ag issues comment <issue-id> "Comment text"
+ag issue list
+ag issue submit --title "Issue Title" --description "Description" --priority medium --labels bug,feature
+ag issue show <issue-id>
+ag issue update <issue-id> --status resolved
+ag issue comment <issue-id> "Comment text"
 ```
 
 ### Note Taking (agentic-notes)

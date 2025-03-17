@@ -29,26 +29,26 @@ pip install -e .
 
 ```bash
 # List issues for the current project
-ag issues list
+ag issue list
 
 # List issues with specific status
-ag issues list --status open
-ag issues list --status resolved
+ag issue list --status open
+ag issue list --status resolved
 
 # List issues for a specific project
-ag issues list --project project-name
+ag issue list --project project-name
 
 # Show details of a specific issue
-ag issues show <issue-id>
+ag issue show <issue-id>
 
 # Submit a new issue
-ag issues submit --title "Issue Title" --description "Issue Description" --priority medium --labels bug,feature
+ag issue submit --title "Issue Title" --description "Issue Description" --priority medium --labels bug,feature
 
 # Update an existing issue
-ag issues update <issue-id> --status resolved --priority low
+ag issue update <issue-id> --status resolved --priority low
 
 # Add a comment to an issue
-ag issues comment <issue-id> "Comment text"
+ag issue comment <issue-id> "Comment text"
 ```
 
 #### Features
