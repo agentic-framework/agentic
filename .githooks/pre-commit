@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Pre-commit hook to check for security issues
+
+echo "Running security checks..."
+
+# Check for '~' directory in project root
+if [ -d "~" ]; then
+  echo "Error: Security alert - Directory named '~' found in project root"
+  echo "This could pose a security risk and should be removed"
+  exit 1
+fi
+
+# Add more security checks here as needed
+
+echo "Security checks passed."
+exit 0

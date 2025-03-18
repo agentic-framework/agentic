@@ -500,3 +500,23 @@ These prompts instruct the AI agent to first understand the Agentic framework's 
 ## Contributing
 
 Contributions to improve the rules and guidelines are welcome. Please submit a pull request with your proposed changes.
+
+### Git Hooks
+
+The repository includes Git hooks to enforce security checks and coding standards:
+
+1. **Setup Git Hooks**
+   ```bash
+   # Run the setup script to configure Git to use the custom hooks
+   $AGHOME/agentic/bin/setup_git_hooks.sh
+   ```
+
+2. **Pre-commit Hooks**
+   
+   The pre-commit hook performs the following checks:
+   - Security check for a directory named `~` in the project root (which could pose a security risk)
+   - Additional security checks may be added in the future
+
+3. **Custom Hooks**
+   
+   All hooks are stored in the `.githooks/` directory in the repository. You can add or modify hooks as needed.
