@@ -40,4 +40,13 @@ jobs:
         fi
         echo "rules.json is valid JSON."
         
+        # Security check: Ensure there's no directory named '~' in the project root
+        echo "Checking for security issues..."
+        if [ -d "~" ]; then
+          echo "Error: Security alert - Directory named '~' found in project root"
+          echo "This could pose a security risk and should be removed"
+          exit 1
+        fi
+        echo "No '~' directory found in project root."
+        
         echo "Documentation structure validation completed successfully."
