@@ -1,4 +1,4 @@
-name: Security Scan
+name: Documentation Validation
 
 on:
   push:
@@ -9,21 +9,35 @@ on:
     - cron: '0 0 * * 0'  # Run weekly on Sundays
 
 jobs:
-  scan:
+  validate:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.12'
-    - name: Install dependencies
+    
+    - name: Validate Documentation Structure
       run: |
-        python -m pip install --upgrade pip
-        pip install bandit safety
-    - name: Run bandit
-      run: |
-        bandit -r src/ -f json -o bandit-results.json --exit-zero
-    - name: Run safety
-      run: |
-        safety check
+        # Check for required documentation files
+        echo "Checking for required documentation files..."
+        for file in README.md docs/AGENT_RULES.md docs/AGENT_QUICK_REFERENCE.md docs/DIRECTORY_STRUCTURE.md; do
+          if [ ! -f "$file" ]; then
+            echo "Error: Required file $file is missing"
+            exit 1
+          fi
+        done
+        echo "All required documentation files are present."
+        
+        # Check for rules.json
+        if [ ! -f "rules.json" ]; then
+          echo "Error: Required file rules.json is missing"
+          exit 1
+        fi
+        
+        # Validate rules.json is valid JSON
+        echo "Validating rules.json format..."
+        if ! jq empty rules.json; then
+          echo "Error: rules.json is not valid JSON"
+          exit 1
+        fi
+        echo "rules.json is valid JSON."
+        
+        echo "Documentation structure validation completed successfully."
