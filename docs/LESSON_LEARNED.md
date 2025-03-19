@@ -39,6 +39,20 @@ git mv check_environment.py scripts/
 
 Using `git mv` ensures that git tracks the file movement and preserves the file history.
 
+### Update: Moving README.md Back to Root
+
+Later in the project, we decided to move the README.md file back to the root directory for better visibility on GitHub and other platforms. Again, we used `git mv` to preserve the file history:
+
+```bash
+# Moving README.md back to root
+git mv docs/README.md ./
+
+# Git status showed:
+# renamed: docs/README.md -> README.md
+```
+
+This change required updating references to docs/README.md in various documentation files to point to the root README.md file instead.
+
 ### Recovery Strategy
 
 If you've already used regular `mv` instead of `git mv`, you can recover by:
